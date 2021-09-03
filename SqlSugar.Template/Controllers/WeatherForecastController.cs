@@ -34,7 +34,7 @@ namespace SqlSugar.Template.Controllers
             //var list = _order.GetOrders();
             int page = 1;
             int intPageSize = 50;
-            var data = await _sysJobLogService.QueryPage(a => a.JobLogID >= 0, page, intPageSize, " JobLogID desc ");
+            var data = await _sysJobLogService.QueryById(10);
 
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

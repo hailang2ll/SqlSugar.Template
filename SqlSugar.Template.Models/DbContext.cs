@@ -51,6 +51,7 @@ namespace SqlSugar.Template.Models
                 Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
             };
 
+            
             var allTables = Db.DbMaintenance.GetTableInfoList().Select(it => it.Name).ToList();
             foreach (var table in allTables)
             {
