@@ -18,15 +18,5 @@ namespace SqlSugar.Template.Service
             this._dal = dal;
             base.BaseDal = dal;
         }
-
-        public Task<string> GetUserRoleNameStr(string loginName, string loginPwd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Sys_JobLog> SaveUserInfo(string loginName, string loginPwd)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

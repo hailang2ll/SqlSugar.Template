@@ -12,7 +12,6 @@ namespace SqlSugar.Template.Contracts
     /// </summary>	
     public interface ISysJobLogService : IBaseServices<Sys_JobLog>
     {
-        Task<Sys_JobLog> SaveUserInfo(string loginName, string loginPwd);
-        Task<string> GetUserRoleNameStr(string loginName, string loginPwd);
+       
     }
 }
