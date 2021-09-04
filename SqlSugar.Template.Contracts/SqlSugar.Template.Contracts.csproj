@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="IBaseServices.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SqlSugar.Template.Models\SqlSugar.Template.Models.csproj" />
   </ItemGroup>
 

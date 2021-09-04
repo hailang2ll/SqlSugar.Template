@@ -1,13 +1,8 @@
 ﻿using Autofac;
-using Autofac.Extras.DynamicProxy;
-using SqlSugar.Template.Models;
-using SqlSugar.Template.Repository;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace SqlSugar.Template
 {
@@ -31,24 +26,52 @@ namespace SqlSugar.Template
             }
 
 
-            var cacheType = new List<Type>();
-            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();//注册仓储
+            //var cacheType = new List<Type>();
+            //builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();//注册仓储
 
-            // 获取 Service.dll 程序集服务，并注册
-            var assemblysServices = Assembly.LoadFrom(servicesDllFile);
+            //// 获取 Service.dll 程序集服务，并注册
+            //var assemblysServices = Assembly.LoadFrom(servicesDllFile);
+            //builder.RegisterAssemblyTypes(assemblysServices)
+            //          .AsImplementedInterfaces()
+            //          .InstancePerDependency()
+            //          .PropertiesAutowired()
+            //          .EnableInterfaceInterceptors()//引用Autofac.Extras.DynamicProxy;
+            //          .InterceptedBy(cacheType.ToArray());//允许将拦截器服务的列表分配给注册。
+
+            //// 获取 Repository.dll 程序集服务，并注册
+            //var assemblysRepository = Assembly.LoadFrom(repositoryDllFile);
+            //builder.RegisterAssemblyTypes(assemblysRepository)
+            //       .AsImplementedInterfaces()
+            //       .PropertiesAutowired()
+            //       .InstancePerDependency();
+
+           string serviceName = AppDomain.CurrentDomain.FriendlyName.Replace(".Api", "").Replace("Api", "").Replace(".API", "").Replace("API", "");
+            string iserviceName = serviceName;
+            if (serviceName.EndsWith("."))
+            {
+                //iserviceName += "Contracts";
+                serviceName += "Service";
+            }
+            else
+            {
+                //iserviceName += ".Contracts";
+                serviceName += ".Service";
+            }
+
+            Assembly assemblysServices = Assembly.Load(serviceName);
             builder.RegisterAssemblyTypes(assemblysServices)
-                      .AsImplementedInterfaces()
-                      .InstancePerDependency()
-                      .PropertiesAutowired()
-                      .EnableInterfaceInterceptors()//引用Autofac.Extras.DynamicProxy;
-                      .InterceptedBy(cacheType.ToArray());//允许将拦截器服务的列表分配给注册。
+            .Where(t => t.FullName.EndsWith("Service") && !t.IsAbstract) //类名以service结尾，且类型不能是抽象的　
+                .InstancePerLifetimeScope() //生命周期
+                .AsImplementedInterfaces()
+                .PropertiesAutowired(); //属性注入
 
-            // 获取 Repository.dll 程序集服务，并注册
-            var assemblysRepository = Assembly.LoadFrom(repositoryDllFile);
+
+            Assembly assemblysRepository = Assembly.Load("SqlSugar.Template.Repository");
             builder.RegisterAssemblyTypes(assemblysRepository)
-                   .AsImplementedInterfaces()
-                   .PropertiesAutowired()
-                   .InstancePerDependency();
+            //.Where(t => t.FullName.EndsWith("Repository") && !t.IsAbstract) //类名以service结尾，且类型不能是抽象的　
+                .InstancePerLifetimeScope() //生命周期
+                .AsImplementedInterfaces()
+                .PropertiesAutowired(); //属性注入
 
             #endregion
 
@@ -65,9 +88,9 @@ namespace SqlSugar.Template
 
             //只能注入该类中的虚方法，且必须是public
             //这里仅仅是一个单独类无接口测试，不用过多追问
-            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(Love)))
-                .EnableClassInterceptors()
-                .InterceptedBy(cacheType.ToArray());
+            //builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(Love)))
+            //    .EnableClassInterceptors()
+            //    .InterceptedBy(cacheType.ToArray());
             #endregion
 
             #region 单独注册一个含有接口的类，启用interface代理拦截

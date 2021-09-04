@@ -11,7 +11,6 @@ namespace SqlSugar.Template.Contracts
 {
     public interface IBaseServices<TEntity> where TEntity : class
     {
-
         Task<TEntity> QueryById(object objId);
     }
 }

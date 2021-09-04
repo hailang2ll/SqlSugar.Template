@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SqlSugar.Template.Models;
-using SqlSugar.Template.Repository;
-using SqlSugar.Template.Service;
+using SqlSugar.Template.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +18,9 @@ namespace SqlSugar.Template.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        public SysJobLogService _sysJobLogService { get; set; }
+        public ISysJobLogService _sysJobLogService { get; set; }
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, SysJobLogService sysJobLogService)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ISysJobLogService sysJobLogService)
         {
             _logger = logger;
             _sysJobLogService = sysJobLogService;
@@ -31,9 +29,6 @@ namespace SqlSugar.Template.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> GetAsync()
         {
-            //var list = _order.GetOrders();
-            int page = 1;
-            int intPageSize = 50;
             var data = await _sysJobLogService.QueryById(10);
 
             var rng = new Random();

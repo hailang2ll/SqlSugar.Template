@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BaseRepository.cs" />
+    <Compile Remove="IBaseRepository.cs" />
     <Compile Remove="IRoleModulePermissionRepository.cs" />
     <Compile Remove="RoleModulePermissionRepository.cs" />
   </ItemGroup>

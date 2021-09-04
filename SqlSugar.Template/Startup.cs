@@ -1,55 +1,80 @@
 using Autofac;
+using DMS.Autofac;
+using DMS.NLogs.Filters;
+using DMS.Swagger;
+using DMSN.Common.Configurations;
+using DMSN.Common.Helper;
+using DMSN.Common.JsonHandler.JsonConverters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using SqlSugar.Template.Repository;
-using SqlSugar.Template.Service;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SqlSugar.Template
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        public ISqlSugarClient sqlSugar;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
+            sqlSugar = new SqlSugarClient(new ConnectionConfig()
+            {
+                DbType = SqlSugar.DbType.MySql,
+                ConnectionString = Configuration.GetConnectionString("trydou_sys_master"),
+                IsAutoCloseConnection = true,
+            });
+            //调式代码 用来打印SQL 
+            sqlSugar.Aop.OnLogExecuting = (sql, pars) =>
+            {
+                Console.WriteLine(sql);//输出sql
+                Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
+            };
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(new Appsettings(Configuration));
-            services.AddControllers();
-            services.AddScoped<SysJobLogService>();//添加这2行
-            services.AddDirectoryBrowser();//添加这2行
+            services.AddControllers(option =>
+            {
+                option.Filters.Add<GlobalExceptionFilter>();
 
-            services.AddSqlsugarSetup();
+            }).AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter("yyyy-MM-dd HH:mm:ss"));
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.DictionaryKeyPolicy = null;
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSwaggerGenV2();
+
+            services.AddSingleton<ISqlSugarClient>(sqlSugar);
         }
 
-        // 注意在Program.CreateHostBuilder，添加Autofac服务工厂
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterModule(new AutofacModuleRegister());
-            //builder.RegisterModule<AutofacPropertityModuleReg>();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerUIV2(DebugHelper.IsDebug(GetType()));
             }
+            app.UseStaticHttpContext();
+
+
 
             app.UseRouting();
 
@@ -59,6 +84,11 @@ namespace SqlSugar.Template
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterAutofac31();
         }
     }
 }
