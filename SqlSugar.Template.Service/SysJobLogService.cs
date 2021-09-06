@@ -19,7 +19,6 @@ namespace SqlSugar.Template.Service
         public SysJobLogService(ISqlSugarClient sqlSugar)
         {
             db = sqlSugar;
-
         }
 
         public async Task<ResponseResult> AddAsync(AddJobLogParam param)
@@ -106,11 +105,6 @@ namespace SqlSugar.Template.Service
                 result.errmsg = "参数不合法";
                 return result;
             }
-
-            //var d = _fsql.Delete<SysJobLog>(new[] { 1, 2 }).ExecuteAffrows();
-            //var t4 = _fsql.Delete<SysJobLog>(new { JobLogID = 3 }).ExecuteAffrows();
-            //var t5 = _fsql.Delete<SysJobLog>().Where(a => a.JobLogID == 1).ExecuteAffrows();
-
 
             var t1 = await db.Deleteable<Sys_JobLog>()
                 .Where(a => a.JobLogID == jobLogID)
@@ -201,6 +195,7 @@ namespace SqlSugar.Template.Service
             var list = await db.Queryable<Sys_JobLog>()
                 .WhereIF(where != null, where)
                 .Select<JobLogResult>()
+                .OrderBy(q => q.JobLogID, OrderByType.Desc)
                 .ToPageListAsync(param.PageIndex, param.PageSize, totalCount);
             if (list == null || list.Count <= 0)
             {
