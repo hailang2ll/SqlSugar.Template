@@ -143,6 +143,7 @@ namespace SqlSugar.Template.Service
         {
             ResponseResult<JobLogResult> result = new ResponseResult<JobLogResult>() { data = new JobLogResult() };
             var entity = await db.Queryable<Sys_JobLog>()
+                .Select<JobLogResult>()
                 .FirstAsync(q => q.JobLogID == jobLogID);
             if (entity == null)
             {
@@ -166,9 +167,10 @@ namespace SqlSugar.Template.Service
                 result.errmsg = "参数不合法";
                 return result;
             }
-            var list = await fsql.Select<SysJobLog>()
+            var list = await db.Queryable<Sys_JobLog>()
+                .Select<JobLogResult>()
                 .Where(q => q.JobLogType == jobLogType)
-                .ToListAsync<JobLogResult>();
+                .ToListAsync();
             if (list == null || list.Count <= 0)
             {
                 result.errno = 2;
@@ -192,14 +194,14 @@ namespace SqlSugar.Template.Service
                 return result;
             }
 
-            Expression<Func<SysJobLog, bool>> where = q => q.JobLogType == 1;
+            RefAsync<int> totalCount = 0;
+            Expression<Func<Sys_JobLog, bool>> where = q => q.JobLogType == 1;
             where = where.And(q => q.TaskLogType == 1);
 
-            var list = await fsql.Select<SysJobLog>()
-                .Where(where)
-                .Count(out var total) //总记录数量
-                .Page(param.PageIndex, param.PageSize)
-                .ToListAsync<JobLogResult>();
+            var list = await db.Queryable<Sys_JobLog>()
+                .WhereIF(where != null, where)
+                .Select<JobLogResult>()
+                .ToPageListAsync(param.PageIndex, param.PageSize, totalCount);
             if (list == null || list.Count <= 0)
             {
                 result.errno = 2;
@@ -209,7 +211,7 @@ namespace SqlSugar.Template.Service
             result.data.ResultList = list;
             result.data.PageIndex = param.PageIndex;
             result.data.PageSize = param.PageSize;
-            result.data.TotalRecord = (int)total;
+            result.data.TotalRecord = (int)totalCount;
             return result;
         }
     }

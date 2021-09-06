@@ -16,10 +16,23 @@ using System.Linq;
 
 namespace SqlSugar.Template
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ISqlSugarClient sqlSugar;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -85,7 +98,10 @@ namespace SqlSugar.Template
                 endpoints.MapControllers();
             });
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterAutofac31();

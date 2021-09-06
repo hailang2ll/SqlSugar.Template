@@ -4,11 +4,21 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\gitme\SqlSugar.Template\SqlSugar.Template\SqlSugar.Template.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="AutofacModuleRegister.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Configs\log4net.config" />
+    <None Include="Configs\nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DMS.Auth" Version="1.2.6.3" />
     <PackageReference Include="DMS.Autofac" Version="1.2.1" />
     <PackageReference Include="DMS.Swagger" Version="1.4.7.1" />
   </ItemGroup>

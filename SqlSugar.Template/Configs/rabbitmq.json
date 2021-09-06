@@ -1,0 +1,52 @@
+﻿{
+  "ConnectionString": {
+    "Host": "192.168.0.102",
+    "Port": 5672,
+    "TimeOut": 60,
+    "UserName": "admin",
+    "Password": "admin123"
+  },
+  "Services": [
+    {
+      "Durable": true,
+      "IsAudit": true,
+      "PatternType": "Routing",
+      "RetryTimeRules": [ 1, 30, 10 ],
+      "QueueName": "queue.direct.routinghandler",
+      "AssemblyName": "Stack.RabbitMQ.ServiceTest",
+      "NameSpace": "Stack.RabbitMQ.ServiceTest.Consumers",
+      "ClassName": "RoutingHandler"
+    },
+    {
+      "Durable": true,
+      "IsAudit": true,
+      "PatternType": "RPC",
+      "RetryTimeRules": [ 1, 30, 10 ],
+      "QueueName": "queue.rpc.rpcHandler",
+      "AssemblyName": "Stack.RabbitMQ.ServiceTest",
+      "NameSpace": "Stack.RabbitMQ.ServiceTest.Consumers",
+      "ClassName": "RpcHandler"
+    },
+    {
+      "Durable": true,
+      "IsAudit": true,
+      "PatternType": "Subscribe",
+      "RetryTimeRules": [ 1, 30, 10 ],
+      "QueueName": "stack.rabbitmq.subscribehandler",
+      "ExchangeName": "stack.rabbitmq.subscriexchange",
+      "AssemblyName": "Stack.RabbitMQ.ServiceTest",
+      "NameSpace": "Stack.RabbitMQ.ServiceTest.Consumers",
+      "ClassName": "SubscribeHandler"
+    },
+    {
+      "Durable": true,
+      "IsAudit": true,
+      "PatternType": "Topic",
+      "RetryTimeRules": [ 1, 30, 10 ],
+      "QueueName": "queue.topic.topicHandler",
+      "AssemblyName": "Stack.RabbitMQ.ServiceTest",
+      "NameSpace": "Stack.RabbitMQ.ServiceTest.Consumers",
+      "ClassName": "TopicHandler"
+    }
+  ]
+}

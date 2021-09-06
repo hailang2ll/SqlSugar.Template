@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SqlSugar.Template</name>
+    </assembly>
+    <members>
+        <member name="T:SqlSugar.Template.Controllers.JobLogController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService)">
+            <summary>
+            
+            </summary>
+            <param name="jobLogService"></param>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.AddAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
+            <summary>
+            新增工作日志
+            [HttpPost("Add"), CheckLogin]
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.AddTranAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
+            <summary>
+            事物处理
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.DeleteAsync(System.Int64)">
+            <summary>
+            删除日志
+            </summary>
+            <param name="jobLogID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.UpdateAsync(System.Int64)">
+            <summary>
+            修改日志
+            </summary>
+            <param name="jobLogID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.GetJobLogAsync(System.Int64)">
+            <summary>
+            获取工作日志记录
+            </summary>
+            <param name="jobLogID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.GetJobLogListAsync(System.Int64)">
+            <summary>
+            获取日志集合
+            </summary>
+            <param name="jobLogType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.SearchJobLogAsync(SqlSugar.Template.Contracts.Param.SearchJobLogParam)">
+            <summary>
+            搜索日志
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SqlSugar.Template.Controllers.WeatherForecastController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SqlSugar.Template.Controllers.WeatherForecastController._logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SqlSugar.Template.Controllers.WeatherForecastController._sysJobLogService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{SqlSugar.Template.Controllers.WeatherForecastController},SqlSugar.Template.Contracts.ISysJobLogService)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+            <param name="sysJobLogService"></param>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.WeatherForecastController.GetAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SqlSugar.Template.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SqlSugar.Template.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:SqlSugar.Template.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SqlSugar.Template.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SqlSugar.Template.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SqlSugar.Template.Startup.sqlSugar">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SqlSugar.Template.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:SqlSugar.Template.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:SqlSugar.Template.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:SqlSugar.Template.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:SqlSugar.Template.WeatherForecast">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SqlSugar.Template.WeatherForecast.Date">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SqlSugar.Template.WeatherForecast.TemperatureC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SqlSugar.Template.WeatherForecast.TemperatureF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SqlSugar.Template.WeatherForecast.Summary">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

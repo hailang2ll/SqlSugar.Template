@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DMS.NLogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,7 @@ namespace SqlSugar.Template.Repository.UnitOfWork
             catch (Exception ex)
             {
                 GetDbClient().RollbackTran();
+                Logger.Error($"{ex.Message}\r\n{ex.InnerException}");
             }
         }
 

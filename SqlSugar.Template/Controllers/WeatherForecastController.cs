@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace SqlSugar.Template.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -16,20 +19,32 @@ namespace SqlSugar.Template.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ILogger<WeatherForecastController> _logger;
+        /// <summary>
+        /// 
+        /// </summary>
         public ISysJobLogService _sysJobLogService { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="sysJobLogService"></param>
         public WeatherForecastController(ILogger<WeatherForecastController> logger, ISysJobLogService sysJobLogService)
         {
             _logger = logger;
             _sysJobLogService = sysJobLogService;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> GetAsync()
         {
-            var data = await _sysJobLogService.QueryById(10);
+            var data = await _sysJobLogService.GetJobLogListAsync(12);
 
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
