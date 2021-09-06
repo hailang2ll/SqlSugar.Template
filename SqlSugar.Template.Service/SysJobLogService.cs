@@ -162,8 +162,8 @@ namespace SqlSugar.Template.Service
                 return result;
             }
             var list = await db.Queryable<Sys_JobLog>()
-                .Select<JobLogResult>()
                 .Where(q => q.JobLogType == jobLogType)
+                .Select<JobLogResult>()
                 .ToListAsync();
             if (list == null || list.Count <= 0)
             {
@@ -194,8 +194,8 @@ namespace SqlSugar.Template.Service
 
             var list = await db.Queryable<Sys_JobLog>()
                 .WhereIF(where != null, where)
-                .Select<JobLogResult>()
                 .OrderBy(q => q.JobLogID, OrderByType.Desc)
+                .Select<JobLogResult>()
                 .ToPageListAsync(param.PageIndex, param.PageSize, totalCount);
             if (list == null || list.Count <= 0)
             {
