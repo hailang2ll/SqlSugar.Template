@@ -1,7 +1,6 @@
 ﻿{
   "RedisConfig": {
-    "RedisConnectionString": "192.168.31.200:6379,allowadmin=true",
-    "RedisConnectionPwd": "123456",
+    "RedisConnectionString": "192.168.31.200:6379,allowadmin=true,password=123456",
     "RedisPrefixKey": ""
   }
 }

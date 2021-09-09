@@ -1,8 +1,11 @@
 using Autofac;
+using DMS.Auth;
 using DMS.Autofac;
 using DMS.NLogs.Filters;
+using DMS.Redis.Configurations;
 using DMS.Swagger;
 using DMSN.Common.Configurations;
+using DMSN.Common.CoreExtensions.ConfigExtensions;
 using DMSN.Common.Helper;
 using DMSN.Common.JsonHandler.JsonConverters;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SqlSugar.Template.Extensions;
 using System;
 using System.Linq;
 
@@ -28,26 +32,16 @@ namespace SqlSugar.Template
         /// <summary>
         /// 
         /// </summary>
-        public ISqlSugarClient sqlSugar;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="configuration"></param>
-        public Startup(IConfiguration configuration)
+        /// <param name="env"></param>
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
-            sqlSugar = new SqlSugarClient(new ConnectionConfig()
-            {
-                DbType = SqlSugar.DbType.MySql,
-                ConnectionString = Configuration.GetConnectionString("trydou_sys_master"),
-                IsAutoCloseConnection = true,
-            });
-            //调式代码 用来打印SQL 
-            sqlSugar.Aop.OnLogExecuting = (sql, pars) =>
-            {
-                Console.WriteLine(sql);//输出sql
-                Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
-            };
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddRedisFile($"Configs/redis.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"Configs/domain.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true)
+            .AddAppSettingsFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+            Configuration = builder.Build();
         }
 
         /// <summary>
@@ -67,10 +61,12 @@ namespace SqlSugar.Template
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGenV2();
+            services.AddSqlsugarSetup(Configuration);
+            services.AddRedisSetup();
+            services.AddHttpContextSetup();
 
-            services.AddSingleton<ISqlSugarClient>(sqlSugar);
+
         }
 
         /// <summary>
@@ -85,14 +81,10 @@ namespace SqlSugar.Template
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerUIV2(DebugHelper.IsDebug(GetType()));
             }
-            app.UseStaticHttpContext();
-
 
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

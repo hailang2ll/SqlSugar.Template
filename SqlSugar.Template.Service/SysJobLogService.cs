@@ -37,7 +37,7 @@ namespace SqlSugar.Template.Service
             {
                 Name = param.Name,
                 JobLogType = param.JobLogType,
-                ServerIP = IPHelper.GetWebClientIp(),
+                ServerIP = IPHelper.GetCurrentIp(),
                 TaskLogType = param.TaskLogType,
                 Message = param.Message,
                 CreateTime = DateTime.Now,
@@ -66,7 +66,7 @@ namespace SqlSugar.Template.Service
             {
                 Name = param.Name,
                 JobLogType = param.JobLogType,
-                ServerIP = IPHelper.GetWebClientIp(),
+                ServerIP = IPHelper.GetCurrentIp(),
                 TaskLogType = param.TaskLogType,
                 Message = param.Message,
                 CreateTime = DateTime.Now,

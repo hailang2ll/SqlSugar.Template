@@ -17,16 +17,19 @@ namespace SqlSugar.Template.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class JobLogController : BaseController
+    public class JobLogController : ControllerBase
     {
         private readonly ISysJobLogService jobLogService;
+        private readonly IUserAuth userAuth;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="jobLogService"></param>
-        public JobLogController(ISysJobLogService jobLogService)
+        /// <param name="userAuth"></param>
+        public JobLogController(ISysJobLogService jobLogService, IUserAuth userAuth)
         {
             this.jobLogService = jobLogService;
+            this.userAuth = userAuth;
         }
         /// <summary>
         /// 新增工作日志
@@ -37,17 +40,17 @@ namespace SqlSugar.Template.Controllers
         [HttpPost("Add")]
         public async Task<ResponseResult> AddAsync(AddJobLogParam param)
         {
-            //#region 验证登录
-            //var (loginFlag, result) = ChenkLogin(UserTicket);
-            //if (!loginFlag)
-            //{
-            //    return await Task.FromResult(result);
-            //}
-            //#endregion
-            //var appid = Request.Headers["appid"];
-            //var accessToken = Request.Headers["AccessToken"];
-            //long currentUser = UserTicket.ID;
-
+            #region 验证登录
+            var (loginFlag, result) = await userAuth.ChenkLoginAsync();
+            if (!loginFlag)
+            {
+                return result;
+            }
+            var id = userAuth.ID;
+            var name = userAuth.Name;
+            #endregion
+            var appid = Request.Headers["appid"];
+            var accessToken = Request.Headers["AccessToken"];
 
 
             #region 缓存测试

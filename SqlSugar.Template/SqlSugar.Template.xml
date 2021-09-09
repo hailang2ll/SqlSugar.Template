@@ -9,11 +9,12 @@
             
             </summary>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService,DMS.Auth.IUserAuth)">
             <summary>
             
             </summary>
             <param name="jobLogService"></param>
+            <param name="userAuth"></param>
         </member>
         <member name="M:SqlSugar.Template.Controllers.JobLogController.AddAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
             <summary>
@@ -121,16 +122,11 @@
             
             </summary>
         </member>
-        <member name="F:SqlSugar.Template.Startup.sqlSugar">
+        <member name="M:SqlSugar.Template.Startup.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
             
             </summary>
-        </member>
-        <member name="M:SqlSugar.Template.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            
-            </summary>
-            <param name="configuration"></param>
+            <param name="env"></param>
         </member>
         <member name="M:SqlSugar.Template.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
