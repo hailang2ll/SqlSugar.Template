@@ -1,22 +1,19 @@
 using Autofac;
 using DMS.Auth;
 using DMS.Autofac;
+using DMS.Extensions.ServiceExtensions;
 using DMS.NLogs.Filters;
 using DMS.Redis.Configurations;
 using DMS.Swagger;
-using DMSN.Common.Configurations;
 using DMSN.Common.CoreExtensions.ConfigExtensions;
 using DMSN.Common.Helper;
 using DMSN.Common.JsonHandler.JsonConverters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SqlSugar.Template.Extensions;
-using System;
-using System.Linq;
 
 namespace SqlSugar.Template
 {
@@ -61,10 +58,11 @@ namespace SqlSugar.Template
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
-            services.AddSwaggerGenV2();
             services.AddSqlsugarSetup(Configuration);
-            services.AddRedisSetup();
+            services.AddSwaggerGenV2();
             services.AddHttpContextSetup();
+            services.AddRedisSetup();
+            services.AddAuthSetup();
 
 
         }
