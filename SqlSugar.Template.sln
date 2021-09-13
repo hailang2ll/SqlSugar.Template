@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Service",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Contracts", "SqlSugar.Template.Contracts\SqlSugar.Template.Contracts.csproj", "{44450AB6-E46C-4D2A-98CC-AE144459B492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSugar.Template.Extensions", "SqlSugar.Template.Extensions\SqlSugar.Template.Extensions.csproj", "{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Extensions", "SqlSugar.Template.Extensions\SqlSugar.Template.Extensions.csproj", "{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSugar.Template.Gateway", "SqlSugar.Template.Gateway\SqlSugar.Template.Gateway.csproj", "{70C3D585-8BC3-4A87-9F84-3F688A354162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70C3D585-8BC3-4A87-9F84-3F688A354162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C3D585-8BC3-4A87-9F84-3F688A354162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C3D585-8BC3-4A87-9F84-3F688A354162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70C3D585-8BC3-4A87-9F84-3F688A354162}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
