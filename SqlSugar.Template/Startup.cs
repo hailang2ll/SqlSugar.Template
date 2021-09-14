@@ -64,7 +64,6 @@ namespace SqlSugar.Template
             services.AddRedisSetup();
             services.AddAuthSetup();
 
-
         }
 
         /// <summary>
@@ -77,8 +76,8 @@ namespace SqlSugar.Template
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerUIV2(DebugHelper.IsDebug(GetType()));
             }
+            app.UseSwaggerUIV2(DebugHelper.IsDebug(GetType()));
 
 
             app.UseRouting();
