@@ -33,13 +33,15 @@ namespace SqlSugar.Template.Controllers
         }
         /// <summary>
         /// 新增工作日志
-        /// [HttpPost("Add"), CheckLogin]
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost("Add")]
         public async Task<ResponseResult> AddAsync(AddJobLogParam param)
         {
+            var url = DMSN.Common.CoreExtensions.AppConfig.GetVaule("ProductUrl");
+            var de = DMSN.Common.CoreExtensions.AppConfig.GetVaule(new string[] { "Logging", "LogLevel", "Default" });
+
             #region 验证登录
             var (loginFlag, result) = await userAuth.ChenkLoginAsync();
             if (!loginFlag)

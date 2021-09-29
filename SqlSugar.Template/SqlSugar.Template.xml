@@ -19,7 +19,6 @@
         <member name="M:SqlSugar.Template.Controllers.JobLogController.AddAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
             <summary>
             新增工作日志
-            [HttpPost("Add"), CheckLogin]
             </summary>
             <param name="param"></param>
             <returns></returns>

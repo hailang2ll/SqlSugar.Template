@@ -11,6 +11,7 @@ namespace SqlSugar.Template.Contracts
     /// </summary>
     public interface ISysJobLogService
     {
+        Task<ResponseResult> Add2Async(AddJobLogParam param);
         /// <summary>
         /// 异步新增
         /// </summary>

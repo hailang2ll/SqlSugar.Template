@@ -41,7 +41,7 @@ namespace SqlSugar.Template.Models
             Db = new SqlSugarClient(new ConnectionConfig()
             {
                 DbType = SqlSugar.DbType.MySql,
-                ConnectionString = "Data Source=192.168.31.211;Port=3306;User ID=devuser;Password=yxw-88888;Initial Catalog=trydou_sys;Charset=utf8;SslMode=none;Max pool size=10",
+                ConnectionString = "server=192.168.31.211;Database=trydou_sys;Uid=devuser;Pwd=yxw-88888;SslMode=none;",
                 IsAutoCloseConnection = true,
             });
             //调式代码 用来打印SQL 

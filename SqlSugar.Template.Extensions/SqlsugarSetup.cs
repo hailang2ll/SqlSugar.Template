@@ -15,7 +15,7 @@ namespace SqlSugar.Template.Extensions
             ISqlSugarClient sqlSugar = new SqlSugarClient(new ConnectionConfig()
             {
                 DbType = SqlSugar.DbType.MySql,
-                ConnectionString = configuration.GetConnectionString("trydou_sys_master"),
+                ConnectionString = configuration.GetConnectionString("db_master"),
                 IsAutoCloseConnection = true,
             });
             //调式代码 用来打印SQL 

@@ -18,13 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DMS.Auth" Version="2.0.0" />
     <PackageReference Include="DMS.Autofac" Version="1.2.1" />
-    <PackageReference Include="DMS.Swagger" Version="1.4.7.1" />
+    <PackageReference Include="DMS.Swagger" Version="1.4.8" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SqlSugar.Template.Models\SqlSugar.Template.Models.csproj" />
     <ProjectReference Include="..\SqlSugar.Template.Service\SqlSugar.Template.Service.csproj" />
   </ItemGroup>
 

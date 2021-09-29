@@ -209,5 +209,10 @@ namespace SqlSugar.Template.Service
             result.data.TotalRecord = (int)totalCount;
             return result;
         }
+
+        public Task<ResponseResult> Add2Async(AddJobLogParam param)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
