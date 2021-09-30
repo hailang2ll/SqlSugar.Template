@@ -1,6 +1,7 @@
 ﻿using DMSN.Common.BaseResult;
 using DMSN.Common.Extensions.ExpressionFunc;
 using DMSN.Common.Helper;
+using SqlSugar;
 using SqlSugar.Template.Contracts;
 using SqlSugar.Template.Contracts.Param;
 using SqlSugar.Template.Contracts.Result;
