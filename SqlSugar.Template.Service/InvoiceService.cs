@@ -72,6 +72,9 @@ namespace SqlSugar.Template.Service
         {
             ResponseResult<InvoiceResult> result = new ResponseResult<InvoiceResult>() { data = new InvoiceResult() };
 
+
+            var entity2 = await db.Queryable<YxyInvoice>().SingleAsync(q => q.MemberId == 12);
+
             var entity = await db.Queryable<YxyInvoice>()
                 .Select<InvoiceResult>()
                 .FirstAsync(q => q.Id == invoiceID);
