@@ -26,7 +26,7 @@ namespace SqlSugar.Template.Service
             ResponseResult result = new ResponseResult();
 
             if (param == null
-                || string.IsNullOrEmpty(param.TypeName))
+                || string.IsNullOrEmpty(param.EpCode))
             {
                 result.errno = 1;
                 result.errmsg = "参数错误";
@@ -34,16 +34,16 @@ namespace SqlSugar.Template.Service
             }
             YxyInvoice entity = new YxyInvoice()//实体中必须要给默认值
             {
-                MemberId = param.MemberId,
+                MemberId = 111,
                 //TypeName=param.TypeName,
                 //还有很多字段，默认值即可
-                CreateTime = DateTime.Now,
+                //CreateTime = DateTime.Now,
             };
 
             //插入返回自增列
             //db.Insertable(jobLogEntity).ExecuteReturnIdentity();
-            await db.Insertable(entity).InsertColumns(q => entity).ExecuteCommandAsync();
             var t1 = await db.Insertable(entity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
+            // t1 = await db.Insertable(entity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
             result.data = t1;
             return result;
         }
