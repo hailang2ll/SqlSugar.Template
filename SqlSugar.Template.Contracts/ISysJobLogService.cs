@@ -1,6 +1,7 @@
 ﻿using DMSN.Common.BaseResult;
 using SqlSugar.Template.Contracts.Param;
 using SqlSugar.Template.Contracts.Result;
+using SqlSugar.Template.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -49,5 +50,11 @@ namespace SqlSugar.Template.Contracts
         /// </summary>
         /// <returns></returns>
         Task<ResponsePageResult<JobLogResult>> SearchJobLogAsync(SearchJobLogParam param);
+
+
+
+        //Task<ResponseResultV2> GetJobLogV1Async(long jobLogID);
+        //Task<ResponseResultV2<JobLogResult>> GetJobLogV2Async(long jobLogID);
+        //Task<ResponseResultV2<PageModel<JobLogResult>>> SearchJobLogV2Async(SearchJobLogParam param);
     }
 }

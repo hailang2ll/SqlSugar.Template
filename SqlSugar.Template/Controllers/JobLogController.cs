@@ -135,6 +135,15 @@ namespace SqlSugar.Template.Controllers
         [HttpGet("SearchJobLog")]
         public async Task<ResponsePageResult<JobLogResult>> SearchJobLogAsync([FromQuery] SearchJobLogParam param)
         {
+            #region 验证登录
+            var (loginFlag, result) = await userAuth.ChenkLoginAsync();
+            if (!loginFlag)
+            {
+                return new ResponsePageResult<JobLogResult>() { errno = 30, errmsg = "请先登录" };
+            }
+            var id = userAuth.ID;
+            var name = userAuth.Name;
+            #endregion
             return await jobLogService.SearchJobLogAsync(param);
         }
     }
