@@ -49,6 +49,7 @@ namespace SqlSugar.Template
         {
             services.AddControllers(option =>
             {
+                //option.Filters.Add(typeof(CustomResultFilter));
                 option.Filters.Add<GlobalExceptionFilter>();
 
             }).AddJsonOptions(options =>

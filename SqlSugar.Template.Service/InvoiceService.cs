@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DMSN.Common.Extensions;
+using DMSN.Common;
 
 namespace SqlSugar.Template.Service
 {
@@ -26,23 +28,96 @@ namespace SqlSugar.Template.Service
             ResponseResult result = new ResponseResult();
 
             if (param == null
-                || string.IsNullOrEmpty(param.EpCode))
+                || param.InvoiceType <= 0
+                || param.EpCode.IsNullOrEmpty()
+                || param.EpUserId <= 0
+                || param.SubjectType <= 0
+                || !param.DeclareTime.HasValue
+                || param.InvoiceCode.IsNullOrEmpty()
+                || param.InvoiceNumber.IsNullOrEmpty()
+                || !param.PrintTime.HasValue)
             {
                 result.errno = 1;
                 result.errmsg = "参数错误";
                 return result;
             }
+
             YxyInvoice entity = new YxyInvoice()//实体中必须要给默认值
             {
                 MemberId = 111,
-                //TypeName=param.TypeName,
-                //还有很多字段，默认值即可
-                //CreateTime = DateTime.Now,
+                InvoiceGtype = 1,
+                InvoiceType = param.InvoiceType,//必
+                EntryType = param.EntryType,
+                EpCode = param.EpCode,//必
+                EpName = param.EpName,
+                EpCodePath = param.EpCodePath,
+                EpNamePath = param.EpNamePath,
+                EpUserId = param.EpUserId,//必
+                EpUserTruename = param.EpUserTrueName,
+                EpUserTitle = param.EpUserTitle,
+                DepartmentCode = "",//需要处理
+                DepartmentName = "",//需要处理
+                SubjectType = param.SubjectType,//必
+                SubjectName = param.SubjectName,
+                DeclareTime = param.DeclareTime.HasValue ? param.DeclareTime.Value : StaticConst.DATEBEGIN,//必
+                InvoiceCode = !param.InvoiceCode.IsNullOrEmpty() ? "" : param.InvoiceCode,//必   //也有乐税返回  
+                InvoiceNumber = !param.InvoiceNumber.IsNullOrEmpty() ? "" : param.InvoiceNumber,//必     //也有乐税返回  
+                PrintTime = param.PrintTime.HasValue ? param.PrintTime.Value : StaticConst.DATEBEGIN,//必    //也有乐税返回
+                TotalNotaxPrice = param.TotalNotaxPrice,//也有乐税返回
+                InvoicePic = !param.InvoicePic.IsNullOrEmpty() ? "" : param.InvoicePic,
+                Remark = !param.Remark.IsNullOrEmpty() ? "" : param.Remark,
+
+                CheckCode = !param.CheckCode.IsNullOrEmpty() ? param.CheckCode : "",//也有乐税返回
+                MachineCode = !param.MachineCode.IsNullOrEmpty() ? param.MachineCode : "",//也有乐税返回
+                BuyerName = !param.BuyerName.IsNullOrEmpty() ? param.BuyerName : "",//也有乐税返回
+                BuyerTaxpayerCode = !param.BuyerTaxpayerCode.IsNullOrEmpty() ? param.BuyerTaxpayerCode : "",//也有乐税返回
+                BuyerBankNumber = !param.BuyerBankNumber.IsNullOrEmpty() ? param.BuyerBankNumber : "",//也有乐税返回
+                BuyerAddresPhone = !param.BuyerAddresPhone.IsNullOrEmpty() ? param.BuyerAddresPhone : "",//也有乐税返回
+                SellerName = !param.SellerName.IsNullOrEmpty() ? param.SellerName : "",//也有乐税返回
+                SellerTaxpayerCode = !param.SellerTaxpayerCode.IsNullOrEmpty() ? param.SellerTaxpayerCode : "",//也有乐税返回
+                SellerBankNumber = !param.SellerBankNumber.IsNullOrEmpty() ? param.SellerBankNumber : "",//也有乐税返回
+                SellerAddresPhone = !param.SellerAddresPhone.IsNullOrEmpty() ? param.SellerAddresPhone : "",//也有乐税返回
+                TotalTaxPrice = param.TotalTaxPrice,//也有乐税返回
+                TotalPrice = param.TotalPrice,//也有乐税返回
+                ChannelType = 0,//需要处理
+
+                InvoiceTypeName = "",//乐税返回
+                InvoiceTypeCode = "",//乐税返回
+                InvoiceAreaName = "",//乐税结果解析
+                InvoiceAreaCode = "",//乐税结果解析
+                InvoiceRemark = "",//乐税返回
+                ListFlag = 0,//乐税返回
+                VoidFlag = 0,//乐税返回
+                GoodsClerk = "",//乐税返回
+                FeeSign = "",//乐税返回
+                FeeSignName = "",//乐税返回
+
+                LeaveCity = !param.LeaveCity.IsNullOrEmpty() ? param.LeaveCity : "",
+                ArriveCity = !param.ArriveCity.IsNullOrEmpty() ? param.ArriveCity : "",
+                CarTimes = !param.CarTimes.IsNullOrEmpty() ? param.CarTimes : "",
+                SeatType = param.SeatType,
+                LeaveTime = param.LeaveTime.HasValue ? param.LeaveTime.Value : StaticConst.DATEBEGIN,
+                ArriveTime = param.ArriveTime.HasValue ? param.LeaveTime.Value : StaticConst.DATEBEGIN,
+                TicketCount = param.TicketCount,
+                SeatLevel = !param.SeatLevel.IsNullOrEmpty() ? param.SeatLevel : "",
+                LuggageWeight = param.LuggageWeight,
+                ApproveState = 0,
+                ApproveRemark = "",
+                AuditState = 0,
+                AuditRemark = "",
+                InvoiceJson = "",
+                CreateBy = 0,
+                CreateTime = DateTime.Now,
+                UpdateBy = 0,
+                UpdateTime = DateTime.Now,
+                DeleteBy = 0,
+                DeleteFlag = 0,
+                DeleteTime = DateTime.Now,
             };
 
             //插入返回自增列
             //db.Insertable(jobLogEntity).ExecuteReturnIdentity();
-            var t1 = await db.Insertable(entity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
+            var t1 = await db.Insertable(entity).ExecuteCommandAsync();
             // t1 = await db.Insertable(entity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
             result.data = t1;
             return result;

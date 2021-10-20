@@ -1,5 +1,6 @@
 ﻿using DMSN.Common.BaseParam;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SqlSugar.Template.Contracts.Param
 {
@@ -12,14 +13,18 @@ namespace SqlSugar.Template.Contracts.Param
         /// <summary>
         /// 发票种类，11种类型
         ///</summary>
+        //[Required(ErrorMessage = "发票种类不能为空")]
+        //[RegularExpression(pattern: @"^[1-11]\d*$", ErrorMessage = "请选择发票种类")]
         public int InvoiceType { get; set; }
         /// <summary>
         /// 录入方式：1手动，2二维码
         ///</summary>
+        //[RegularExpression(pattern: @"^[1-2]\d*$", ErrorMessage = "请选择录入方式")]
         public int EntryType { get; set; }
         /// <summary>
         /// 背书人-企业编码
         /// </summary>
+        //[Required(ErrorMessage = "组织架构不能为空")]
         public string EpCode { get; set; }
         /// <summary>
         /// 背书人-企业名称
@@ -68,7 +73,7 @@ namespace SqlSugar.Template.Contracts.Param
         /// <summary>
         /// 开票日期
         ///</summary>
-        public DateTime PrintTime { get; set; }
+        public DateTime? PrintTime { get; set; }
         /// <summary>
         /// 不含税金额(开票金额，开具金额)
         ///</summary>
@@ -154,11 +159,11 @@ namespace SqlSugar.Template.Contracts.Param
         /// <summary>
         /// 出发时间
         ///</summary>
-        public DateTime LeaveTime { get; set; }
+        public DateTime? LeaveTime { get; set; }
         /// <summary>
         /// 到达时间
         ///</summary>
-        public DateTime ArriveTime { get; set; }
+        public DateTime? ArriveTime { get; set; }
         /// <summary>
         /// 车票数量
         ///</summary>
