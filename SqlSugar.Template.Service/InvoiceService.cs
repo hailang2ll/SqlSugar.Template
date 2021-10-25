@@ -115,7 +115,7 @@ namespace SqlSugar.Template.Service
                 DeleteTime = DateTime.Now,
             };
 
-            //插入返回自增列
+            //插入返回自增列12
             //db.Insertable(jobLogEntity).ExecuteReturnIdentity();
             var t1 = await db.Insertable(entity).ExecuteCommandAsync();
             // t1 = await db.Insertable(entity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
