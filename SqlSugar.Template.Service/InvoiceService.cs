@@ -115,14 +115,18 @@ namespace SqlSugar.Template.Service
                 DeleteTime = DateTime.Now,
             };
 
-            //插入返回自增列12
+            //插入返回自增列1230
             //db.Insertable(jobLogEntity).ExecuteReturnIdentity();
             var t1 = await db.Insertable(entity).ExecuteCommandAsync();
             // t1 = await db.Insertable(entity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
             result.data = t1;
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public Task<ResponseResult> AddAsync(AddInvoiceParam param)
         {
             throw new NotImplementedException();
