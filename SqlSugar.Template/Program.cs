@@ -34,7 +34,7 @@ namespace SqlSugar.Template
              .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://*:20200");
+                    //webBuilder.UseUrls("http://*:20200");
                     webBuilder.UseNLog($"Configs/nlog.config");
                     webBuilder.UseStartup<Startup>();
                 });

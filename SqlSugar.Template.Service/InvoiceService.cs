@@ -112,7 +112,7 @@ namespace SqlSugar.Template.Service
                 UpdateTime = DateTime.Now,
                 DeleteBy = 0,
                 DeleteFlag = 0,
-                DeleteTime = DateTime.Now,
+                DeleteTime = DateTime.Now, 
             };
 
             //插入返回自增列1230
