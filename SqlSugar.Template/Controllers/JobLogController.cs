@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace SqlSugar.Template.Controllers
 {
     /// <summary>
-    /// 
+    /// 日志
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -21,15 +21,18 @@ namespace SqlSugar.Template.Controllers
     {
         private readonly ISysJobLogService jobLogService;
         private readonly IUserAuth userAuth;
+        private readonly IRedisRepository redisRepository;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="jobLogService"></param>
         /// <param name="userAuth"></param>
-        public JobLogController(ISysJobLogService jobLogService, IUserAuth userAuth)
+        /// <param name="redisRepository"></param>
+        public JobLogController(ISysJobLogService jobLogService, IUserAuth userAuth, IRedisRepository redisRepository)
         {
             this.jobLogService = jobLogService;
             this.userAuth = userAuth;
+            this.redisRepository = redisRepository;
         }
         /// <summary>
         /// 新增工作日志
@@ -56,7 +59,6 @@ namespace SqlSugar.Template.Controllers
 
 
             #region 缓存测试
-            RedisManager redisManager = new RedisManager(0);
             UserTicket userTicket = new UserTicket
             {
                 ID = 1234567890,
@@ -65,8 +67,8 @@ namespace SqlSugar.Template.Controllers
                 Msg = "成功0",
                 Name = "肖浪",
             };
-            var b = redisManager.StringSet("dylan", userTicket);
-            var v = redisManager.StringGet<UserTicket>("dylan");
+            var b = await redisRepository.SetAsync("dylan", userTicket);
+            var v = await redisRepository.GetValueAsync<UserTicket>("dylan");
             #endregion
 
             return await jobLogService.AddAsync(param);

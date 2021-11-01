@@ -4,43 +4,18 @@
         <name>SqlSugar.Template</name>
     </assembly>
     <members>
-        <member name="T:SqlSugar.Template.Controllers.InvoiceController">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SqlSugar.Template.Controllers.InvoiceController.#ctor(SqlSugar.Template.Contracts.IInvoiceService,DMS.Auth.IUserAuth)">
-            <summary>
-            
-            </summary>
-            <param name="invoiceService"></param>
-            <param name="userAuth"></param>
-        </member>
-        <member name="M:SqlSugar.Template.Controllers.InvoiceController.AddAsync(SqlSugar.Template.Contracts.Param.AddInvoiceParam)">
-            <summary>
-            新增工作日志
-            </summary>
-            <param name="param"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SqlSugar.Template.Controllers.InvoiceController.GetInvoiceAsync(System.Int64)">
-            <summary>
-            获取发票信息
-            </summary>
-            <param name="invoiceID"></param>
-            <returns></returns>
-        </member>
         <member name="T:SqlSugar.Template.Controllers.JobLogController">
             <summary>
-            
+            日志
             </summary>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService,DMS.Auth.IUserAuth)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService,DMS.Auth.IUserAuth,DMS.Redis.IRedisRepository)">
             <summary>
             
             </summary>
             <param name="jobLogService"></param>
             <param name="userAuth"></param>
+            <param name="redisRepository"></param>
         </member>
         <member name="M:SqlSugar.Template.Controllers.JobLogController.AddAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
             <summary>
