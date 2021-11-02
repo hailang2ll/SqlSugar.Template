@@ -20,6 +20,23 @@ services.AddSingleton<ISqlSugarClient>(sqlSugar);
 
 ```
 
+# 更多组件注入
+
+```c#
+//sqlsugar注入
+services.AddSqlsugarSetup(Configuration);
+//Swagger 注入
+services.AddSwaggerGenV2();
+//HttpContext注入
+services.AddHttpContextSetup();
+//redis注入
+services.AddRedisSetup();
+//认证身份注入
+services.AddAuthSetup();
+//还有其它更多服务可以注册。。。
+//注入原码参考地址：https://github.com/hailang2ll/DMS
+```
+
 # 新增语法
 
 ```c#
