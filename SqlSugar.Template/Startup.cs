@@ -65,7 +65,7 @@ namespace SqlSugar.Template
             services.AddRedisSetup();
             services.AddAuthSetup();
             //还有其它更多服务可以注册。。。
-            //原码参考：https://github.com/hailang2ll/DMS
+            //原码参考地址：https://github.com/hailang2ll/DMS
         }
 
         /// <summary>

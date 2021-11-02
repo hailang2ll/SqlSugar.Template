@@ -10,10 +10,12 @@ namespace SqlSugar.Template.Repository.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ISqlSugarClient _sqlSugarClient;
+        private readonly ITenant _tenant;
 
         public UnitOfWork(ISqlSugarClient sqlSugarClient)
         {
             _sqlSugarClient = sqlSugarClient;
+            _tenant = _sqlSugarClient as ITenant;
         }
 
         /// <summary>
@@ -28,25 +30,25 @@ namespace SqlSugar.Template.Repository.UnitOfWork
 
         public void BeginTran()
         {
-            GetDbClient().BeginTran();
+            _tenant.BeginTran();
         }
 
         public void CommitTran()
         {
             try
             {
-                GetDbClient().CommitTran(); //
+                _tenant.CommitTran(); 
             }
             catch (Exception ex)
             {
-                GetDbClient().RollbackTran();
+                _tenant.RollbackTran();
                 Logger.Error($"{ex.Message}\r\n{ex.InnerException}");
             }
         }
 
         public void RollbackTran()
         {
-            GetDbClient().RollbackTran();
+            _tenant.RollbackTran();
         }
 
     }

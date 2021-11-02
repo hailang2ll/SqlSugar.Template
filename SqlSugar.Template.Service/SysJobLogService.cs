@@ -95,18 +95,22 @@ namespace SqlSugar.Template.Service
                 SubSysID = 1,
                 SubSysName = "测试子名称",
                 Thread = "测试数据",
-                Url = "http://www.yuxunwang.com/",
-                MemberName = "18802727803",
+                Url = "http://www.xxxxx.com/",
+                MemberName = "name",
                 CreateTime = DateTime.Now,
                 Exception = "测试异常信息",
             };
-            db.Ado.UseTran(() =>
+            var resultTran = await db.Ado.UseTranAsync(async () =>
             {
-                var t1 = db.Insertable(jobLogEntity).ExecuteCommandAsync();
-                var t2 = db.Insertable(jobEntity).ExecuteCommandAsync();
+                var t1 = await db.Insertable(jobLogEntity).ExecuteCommandAsync();
+                var t2 = await db.Insertable(jobEntity).ExecuteCommandAsync();
             });
-
-            return await Task.FromResult(result);
+            if (!resultTran.IsSuccess)
+            {
+                //捕捉异常
+                throw resultTran.ErrorException;
+            }
+            return result;
         }
         /// <summary>
         /// 删除
