@@ -21,11 +21,14 @@ namespace SqlSugar.Template.Service
         {
             db = sqlSugar;
         }
-
+        /// <summary>
+        /// 各种新增语法
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public async Task<ResponseResult> AddAsync(AddJobLogParam param)
         {
             ResponseResult result = new ResponseResult();
-
             if (param == null
                 || string.IsNullOrEmpty(param.Name)
                 || string.IsNullOrEmpty(param.Message))
@@ -45,13 +48,22 @@ namespace SqlSugar.Template.Service
             };
 
             //插入返回自增列
-            //db.Insertable(jobLogEntity).ExecuteReturnIdentity();
-
-            var t1 = await db.Insertable(jobLogEntity).ExecuteCommandAsync();
-            result.data = t1;
+            var flag = db.Insertable(jobLogEntity).ExecuteReturnIdentity();
+            //插入返回影响行
+            flag = await db.Insertable(jobLogEntity).ExecuteCommandAsync();
+            //null 列不插入
+            flag = await db.Insertable(jobLogEntity).IgnoreColumns(ignoreNullColumn: true).ExecuteCommandAsync();
+            //插入指定列
+            flag = db.Insertable(jobLogEntity).InsertColumns(it => new { it.Name, it.JobLogType }).ExecuteReturnIdentity();
+            flag = db.Insertable(jobLogEntity).InsertColumns("Name", "JobLogType").ExecuteReturnIdentity();
+            result.data = flag;
             return result;
         }
-
+        /// <summary>
+        /// 添加事物
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public async Task<ResponseResult> AddTranAsync(AddJobLogParam param)
         {
             ResponseResult result = new ResponseResult();
@@ -96,7 +108,11 @@ namespace SqlSugar.Template.Service
 
             return await Task.FromResult(result);
         }
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="jobLogID"></param>
+        /// <returns></returns>
         public async Task<ResponseResult> DeleteAsync(long jobLogID)
         {
             ResponseResult result = new ResponseResult();
@@ -113,6 +129,11 @@ namespace SqlSugar.Template.Service
             result.data = t1;
             return result;
         }
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="jobLogID"></param>
+        /// <returns></returns>
         public async Task<ResponseResult> UpdateAsync(long jobLogID)
         {
             ResponseResult result = new ResponseResult();
@@ -134,6 +155,11 @@ namespace SqlSugar.Template.Service
             return result;
 
         }
+        /// <summary>
+        /// 详情
+        /// </summary>
+        /// <param name="jobLogID"></param>
+        /// <returns></returns>
         public async Task<ResponseResult<JobLogResult>> GetJobLogAsync(long jobLogID)
         {
             ResponseResult<JobLogResult> result = new ResponseResult<JobLogResult>() { data = new JobLogResult() };
@@ -149,7 +175,11 @@ namespace SqlSugar.Template.Service
             result.data = entity;
             return result;
         }
-
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <param name="jobLogType"></param>
+        /// <returns></returns>
         public async Task<ResponseResult<List<JobLogResult>>> GetJobLogListAsync(long jobLogType)
         {
             ResponseResult<List<JobLogResult>> result = new ResponseResult<List<JobLogResult>>()
@@ -175,7 +205,11 @@ namespace SqlSugar.Template.Service
             result.data = list;
             return result;
         }
-
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public async Task<ResponsePageResult<JobLogResult>> SearchJobLogAsync(SearchJobLogParam param)
         {
             ResponsePageResult<JobLogResult> result = new ResponsePageResult<JobLogResult>()
@@ -190,9 +224,9 @@ namespace SqlSugar.Template.Service
             }
 
             RefAsync<int> totalCount = 0;
-            Expression<Func<Sys_JobLog, bool>> where = q => q.JobLogType == 1;
-            where = where.And(q => q.TaskLogType == 1);
-
+            var expression = Expressionable.Create<Sys_JobLog>();
+            expression.And(m => m.JobLogType == 1);
+            Expression<Func<Sys_JobLog, bool>> where = expression.ToExpression();
             var list = await db.Queryable<Sys_JobLog>()
                 .WhereIF(where != null, where)
                 .OrderBy(q => q.JobLogID, OrderByType.Desc)
@@ -210,7 +244,11 @@ namespace SqlSugar.Template.Service
             result.data.TotalRecord = (int)totalCount;
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public Task<ResponseResult> Add2Async(AddJobLogParam param)
         {
             throw new NotImplementedException();

@@ -11,21 +11,23 @@ namespace SqlSugar.Template.Extensions
 {
     public static class SqlsugarSetup
     {
-        public static void AddSqlsugarSetup(this IServiceCollection services, IConfiguration configuration)
+        public static void AddSqlsugarSetup(this IServiceCollection services, IConfiguration configuration, string dbName = "db_master")
         {
-            ISqlSugarClient sqlSugar = new SqlSugarClient(new ConnectionConfig()
+            SqlSugarScope sqlSugar = new SqlSugarScope(new ConnectionConfig()
             {
                 DbType = SqlSugar.DbType.MySql,
-                ConnectionString = configuration.GetConnectionString("db_master"),
+                ConnectionString = configuration.GetConnectionString(dbName),
                 IsAutoCloseConnection = true,
-            });
-            //调式代码 用来打印SQL 
-            sqlSugar.Aop.OnLogExecuting = (sql, pars) =>
-            {
-                Console.WriteLine(sql);//输出sql
-                Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
-            };
-
+            },
+              db =>
+              {
+                //单例参数配置，所有上下文生效
+                db.Aop.OnLogExecuting = (sql, pars) =>
+                  {
+                      Console.WriteLine(sql);//输出sql
+                    Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
+                };
+              });
             services.AddSingleton<ISqlSugarClient>(sqlSugar);
         }
     }
