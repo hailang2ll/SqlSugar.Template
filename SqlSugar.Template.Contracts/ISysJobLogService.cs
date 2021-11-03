@@ -12,7 +12,6 @@ namespace SqlSugar.Template.Contracts
     /// </summary>
     public interface ISysJobLogService
     {
-        Task<ResponseResult> Add2Async(AddJobLogParam param);
         /// <summary>
         /// 异步新增
         /// </summary>
@@ -50,11 +49,5 @@ namespace SqlSugar.Template.Contracts
         /// </summary>
         /// <returns></returns>
         Task<ResponsePageResult<JobLogResult>> SearchJobLogAsync(SearchJobLogParam param);
-
-
-
-        //Task<ResponseResultV2> GetJobLogV1Async(long jobLogID);
-        //Task<ResponseResultV2<JobLogResult>> GetJobLogV2Async(long jobLogID);
-        //Task<ResponseResultV2<PageModel<JobLogResult>>> SearchJobLogV2Async(SearchJobLogParam param);
     }
 }
