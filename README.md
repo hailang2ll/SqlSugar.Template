@@ -59,8 +59,8 @@ flag = db.Insertable(jobLogEntity).InsertColumns("Name", "JobLogType").ExecuteRe
 ```
 var resultTran = db.Ado.UseTran(() =>
 {
-    var t1 = db.Insertable(jobLogEntity).ExecuteCommandAsync();
-    var t2 = db.Insertable(jobEntity).ExecuteCommandAsync();
+    var t1 = db.Insertable(jobLogEntity).ExecuteCommand();
+    var t2 = db.Insertable(jobEntity).ExecuteCommand(); //禁止里面用异步方法
 });
 if (!resultTran.IsSuccess)
 {
