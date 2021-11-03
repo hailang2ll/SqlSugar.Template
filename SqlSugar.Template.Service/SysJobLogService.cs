@@ -100,6 +100,7 @@ namespace SqlSugar.Template.Service
                 CreateTime = DateTime.Now,
                 Exception = "测试异常信息",
             };
+            #region 事物写法1
             var resultTran = await db.Ado.UseTranAsync(async () =>
             {
                 var t1 = await db.Insertable(jobLogEntity).ExecuteCommandAsync();
@@ -110,6 +111,14 @@ namespace SqlSugar.Template.Service
                 //捕捉异常
                 throw resultTran.ErrorException;
             }
+            #endregion
+            #region 事物写法2-简写
+            resultTran = await db.Ado.UseTranAsync(async () =>
+            {
+                var t1 = await db.Insertable(jobLogEntity).ExecuteCommandAsync();
+                var t2 = await db.Insertable(jobEntity).ExecuteCommandAsync();
+            }, e => throw e);
+            #endregion
             return result;
         }
         /// <summary>
