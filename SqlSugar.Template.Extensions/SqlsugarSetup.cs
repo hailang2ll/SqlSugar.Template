@@ -9,6 +9,9 @@ using SqlSugar;
 
 namespace SqlSugar.Template.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class SqlsugarSetup
     {
         public static void AddSqlsugarSetup(this IServiceCollection services, IConfiguration configuration, string dbName = "db_master")
@@ -21,12 +24,12 @@ namespace SqlSugar.Template.Extensions
             },
               db =>
               {
-                //单例参数配置，所有上下文生效
-                db.Aop.OnLogExecuting = (sql, pars) =>
-                  {
+                  //单例参数配置，所有上下文生效
+                  db.Aop.OnLogExecuting = (sql, pars) =>
+                    {
                       Console.WriteLine(sql);//输出sql
-                    Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
-                };
+                      Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
+                  };
               });
             services.AddSingleton<ISqlSugarClient>(sqlSugar);
         }

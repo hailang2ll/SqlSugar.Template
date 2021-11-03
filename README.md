@@ -78,8 +78,18 @@ var resultTran = await db.Ado.UseTranAsync(async () =>
 });
 if (!resultTran.IsSuccess)
 {
+    //事物失败，异常捕捉
     throw resultTran.ErrorException;
 }
+```
+
+```
+resultTran = await db.Ado.UseTranAsync(async () =>
+{
+    var t1 = await db.Insertable(jobLogEntity).ExecuteCommandAsync();
+    var t2 = await db.Insertable(jobEntity).ExecuteCommandAsync();
+}, e => throw e); //事物失败，异常捕捉
+
 ```
 
 # 删除
