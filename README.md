@@ -1,4 +1,4 @@
-# SqlSugarScope 单例注入1
+# SqlSugarScope 单例注入
 
 ```c#
 SqlSugarScope sqlSugar = new SqlSugarScope(new ConnectionConfig()
