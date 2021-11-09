@@ -1,3 +1,35 @@
+# 项目快速安装使用
+
+### 安装项目模板
+
+```
+dotnet new -i sqlsugar.template
+```
+
+![image-20211109092426761](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211109092426761.png)
+
+### 创建项目
+
+```
+dotnet new sqlsugartemplate -n YXY.Member
+```
+
+### 创建解决方案
+
+```
+dotnet new sln -n YXY.Member
+```
+
+### 添加项目到解决方案
+
+```
+dotnet sln YXY.Member.sln add SqlSugar.Template
+dotnet sln YXY.Member.sln add SqlSugar.Template.Contracts
+dotnet sln YXY.Member.sln add SqlSugar.Template.Extensions
+dotnet sln YXY.Member.sln add SqlSugar.Template.Models
+dotnet sln YXY.Member.sln add SqlSugar.Template.Service
+```
+
 # SqlSugarScope 单例注入
 
 ```c#
