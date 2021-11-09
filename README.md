@@ -5,13 +5,13 @@
 ```
 dotnet new -i sqlsugar.template
 ```
+![image](https://user-images.githubusercontent.com/28613121/140845394-e9c7f133-ab15-4bf9-a3d7-f59e325adf43.png)
 
 ### 创建项目
 
 ```
 dotnet new sqlsugartemplate -n YXY.Member
 ```
-![image](https://user-images.githubusercontent.com/28613121/140845394-e9c7f133-ab15-4bf9-a3d7-f59e325adf43.png)
 
 ### 创建解决方案
 
