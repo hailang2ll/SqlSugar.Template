@@ -60,7 +60,7 @@ namespace SqlSugar.Template.Service
             return result;
         }
         /// <summary>
-        /// 添加事物
+        /// 添加事物 
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
