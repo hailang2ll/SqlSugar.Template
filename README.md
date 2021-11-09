@@ -6,8 +6,6 @@
 dotnet new -i sqlsugar.template
 ```
 
-![image-20211109092426761](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211109092426761.png)
-
 ### 创建项目
 
 ```
