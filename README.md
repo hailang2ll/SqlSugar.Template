@@ -55,12 +55,16 @@ dotnet new sln -n YXY.Member
 ### 添加项目到解决方案
 
 ```
-dotnet sln YXY.Member.sln add SqlSugar.Template
-dotnet sln YXY.Member.sln add SqlSugar.Template.Contracts
-dotnet sln YXY.Member.sln add SqlSugar.Template.Extensions
-dotnet sln YXY.Member.sln add SqlSugar.Template.Models
-dotnet sln YXY.Member.sln add SqlSugar.Template.Service
+dotnet sln YXY.Member.sln add YXY.Member
+dotnet sln YXY.Member.sln add YXY.Member.Contracts
+dotnet sln YXY.Member.sln add YXY.Member.Extensions
+dotnet sln YXY.Member.sln add YXY.Member.Models
+dotnet sln YXY.Member.sln add YXY.Member.Repository
+dotnet sln YXY.Member.sln add YXY.Member.Service
 ```
+![image](https://user-images.githubusercontent.com/28613121/141226773-578bca2e-46f5-403c-a567-e839b92b806a.png)
+
+以上整个项目模板创建成功了，可以正常使用了，打开项目解决方案即可运行。
 
 # SqlSugarScope 单例注入
 
