@@ -2,18 +2,52 @@
 
 ### 安装项目模板
 
+##### 进入CMD直接运行命令，会出现如下图红色框的项目模板
+
 ```
 dotnet new -i sqlsugar.template
 ```
-![image](https://user-images.githubusercontent.com/28613121/140845394-e9c7f133-ab15-4bf9-a3d7-f59e325adf43.png)
+![image-20211111095349813](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111095349813.png)
 
-### 创建项目
+##### 查看安装的模板在哪里？也在CMD中直接运行命令，如下图：
+
+```
+dotnet new --list
+```
+
+![image-20211111095749281](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111095749281.png)
+
+以上我们的项目模板就安装好了，现在我们来使用模板
+
+### 创建项目模板
+
+用CMD进入你的工作目录，如：D:\test
+
+执行命令：
 
 ```
 dotnet new sqlsugartemplate -n YXY.Member
 ```
 
+sqlsugartemplate：是模板的名称
+
+YXY.Member：是你想定义的项目名称
+
+![image-20211111100430541](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111100430541.png)
+
+![image-20211111100356658](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111100356658.png)
+
+以上项目的模板创建成功了，这里需要创建项目的解决方案工程文件
+
 ### 创建解决方案
+
+此时进入项目的目录，执行命令
+
+```
+cd YXY.Member
+```
+
+添加项目的解决方案
 
 ```
 dotnet new sln -n YXY.Member
