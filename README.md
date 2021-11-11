@@ -7,15 +7,14 @@
 ```
 dotnet new -i sqlsugar.template
 ```
-![image-20211111095349813](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111095349813.png)
+![image-20211111095349813](https://user-images.githubusercontent.com/28613121/141225881-33fdad24-c6e1-416e-a91a-8fa86e7cc842.png)
 
 ##### 查看安装的模板在哪里？也在CMD中直接运行命令，如下图：
 
 ```
 dotnet new --list
 ```
-
-![image-20211111095749281](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111095749281.png)
+![image-20211111095749281](https://user-images.githubusercontent.com/28613121/141225950-5d137f35-586e-4517-ac76-e2076e5045e4.png)
 
 以上我们的项目模板就安装好了，现在我们来使用模板
 
@@ -33,9 +32,9 @@ sqlsugartemplate：是模板的名称
 
 YXY.Member：是你想定义的项目名称
 
-![image-20211111100430541](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111100430541.png)
+![image-20211111100430541](https://user-images.githubusercontent.com/28613121/141225993-a0a4952a-f9cc-4b6a-826a-c836217a0c39.png)
 
-![image-20211111100356658](C:\Users\dylan\AppData\Roaming\Typora\typora-user-images\image-20211111100356658.png)
+![image-20211111100356658](https://user-images.githubusercontent.com/28613121/141226015-90ea9d1d-65f3-4f79-aa99-6ea77740fbcd.png)
 
 以上项目的模板创建成功了，这里需要创建项目的解决方案工程文件
 
