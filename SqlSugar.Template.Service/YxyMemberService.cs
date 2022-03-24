@@ -16,7 +16,7 @@ namespace SqlSugar.Template.Service
         public ISqlSugarClient db;
         public YxyMemberService(ISqlSugarClient sqlSugar)
         {
-            db = sqlSugar;
+            db = sqlSugar.AsTenant().GetConnection("yxy_system"); 
         }
 
         /// <summary>
@@ -26,6 +26,7 @@ namespace SqlSugar.Template.Service
         /// <returns></returns>
         public async Task<ResponseResult<YxyMemberResult>> GetMemberAsync(long jobLogID)
         {
+
             ResponseResult<YxyMemberResult> result = new() { data = new YxyMemberResult() };
             var entity = await db.Queryable<YxyMember>()
                 .Select<YxyMemberResult>()
