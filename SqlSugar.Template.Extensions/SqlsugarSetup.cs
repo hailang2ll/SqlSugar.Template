@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SqlSugar;
+using SqlSugar.Template.Extensions.DB;
 
 namespace SqlSugar.Template.Extensions
 {
@@ -14,23 +15,35 @@ namespace SqlSugar.Template.Extensions
     /// </summary>
     public static class SqlsugarSetup
     {
-        public static void AddSqlsugarSetup(this IServiceCollection services, IConfiguration configuration, string dbName = "db_master")
+        public static void AddSqlsugarSetup(this IServiceCollection services, IConfiguration configuration)
         {
-            SqlSugarScope sqlSugar = new SqlSugarScope(new ConnectionConfig()
+            var listConfig = new List<ConnectionConfig>();
+            var allCon = DBConfig.MutiInitConn();
+            //循环数据库连接
+            allCon.ForEach(q =>
             {
-                DbType = SqlSugar.DbType.MySql,
-                ConnectionString = configuration.GetConnectionString(dbName),
-                IsAutoCloseConnection = true,
-            },
-              db =>
-              {
-                  //单例参数配置，所有上下文生效
-                  db.Aop.OnLogExecuting = (sql, pars) =>
+                listConfig.Add(new ConnectionConfig()
+                {
+                    DbType = (DbType)q.DbType,
+                    ConnectionString = q.Connection,
+                    IsAutoCloseConnection = true,
+                    ConfigId = q.ConnId,
+                });
+            });
+            SqlSugarScope sqlSugar = new SqlSugarScope(listConfig,
+            db =>
+            {
+                //循环输出sql
+                allCon.ForEach(q =>
+                {
+                    db.GetConnection(q.ConnId).Aop.OnLogExecuting = (sql, pars) =>
                     {
-                      Console.WriteLine(sql);//输出sql
-                      Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
-                  };
-              });
+                        Console.WriteLine(sql);//输出sql
+                        Console.WriteLine(string.Join(",", pars?.Select(it => it.ParameterName + ":" + it.Value)));//参数
+                    };
+                });
+
+            });
             services.AddSingleton<ISqlSugarClient>(sqlSugar);
         }
     }

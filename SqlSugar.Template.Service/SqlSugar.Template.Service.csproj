@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DMS.Auth" Version="2.1.0" />
-    <PackageReference Include="DMS.NLogs" Version="1.4.2" />
+    <PackageReference Include="DMS.Auth" Version="3.4.0" />
+    <PackageReference Include="DMS.NLogs" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

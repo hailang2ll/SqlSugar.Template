@@ -1,7 +1,6 @@
-﻿using DMSN.Common.BaseResult;
+﻿using DMS.Common.Model.Result;
 using SqlSugar.Template.Contracts.Param;
 using SqlSugar.Template.Contracts.Result;
-using SqlSugar.Template.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -48,6 +47,6 @@ namespace SqlSugar.Template.Contracts
         /// 异步查询
         /// </summary>
         /// <returns></returns>
-        Task<ResponsePageResult<JobLogResult>> SearchJobLogAsync(SearchJobLogParam param);
+        Task<ResponseResult<PageModel<JobLogResult>>> SearchJobLogAsync(SearchJobLogParam param);
     }
 }

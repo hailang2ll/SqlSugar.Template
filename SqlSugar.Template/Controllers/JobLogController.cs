@@ -1,7 +1,7 @@
 ﻿using DMS.Auth;
-using DMS.Auth.Tickets;
+using DMS.Auth.Oauth2;
+using DMS.Common.Model.Result;
 using DMS.Redis;
-using DMSN.Common.BaseResult;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar.Template.Contracts;
 using SqlSugar.Template.Contracts.Param;
@@ -19,6 +19,7 @@ namespace SqlSugar.Template.Controllers
     [ApiController]
     public class JobLogController : ControllerBase
     {
+
         private readonly ISysJobLogService jobLogService;
         private readonly IUserAuth userAuth;
         private readonly IRedisRepository redisRepository;
@@ -42,29 +43,23 @@ namespace SqlSugar.Template.Controllers
         [HttpPost("Add")]
         public async Task<ResponseResult> AddAsync(AddJobLogParam param)
         {
-            var url = DMSN.Common.CoreExtensions.AppConfig.GetVaule("ProductUrl");
-            var de = DMSN.Common.CoreExtensions.AppConfig.GetVaule(new string[] { "Logging", "LogLevel", "Default" });
+            var url = DMS.Common.AppConfig.GetValue("ProductUrl");
+            var de = DMS.Common.AppConfig.GetValue(new string[] { "Logging", "LogLevel", "Default" });
 
-            #region 验证登录
-            var (loginFlag, result) = await userAuth.ChenkLoginAsync();
-            if (!loginFlag)
-            {
-                return result;
-            }
             var id = userAuth.ID;
             var name = userAuth.Name;
-            #endregion
+
             var appid = Request.Headers["appid"];
             var accessToken = Request.Headers["AccessToken"];
 
 
             #region 缓存测试
-            UserTicket userTicket = new UserTicket
+            UserTicket userTicket = new()
             {
                 ID = 1234567890,
                 ExpDate = DateTime.Now,
-                Code = 0,
-                Msg = "成功0",
+                EpCode = "1222",
+                UID = "成功0",
                 Name = "肖浪",
             };
             var b = await redisRepository.SetAsync("dylan", userTicket);
@@ -135,17 +130,11 @@ namespace SqlSugar.Template.Controllers
         /// <returns></returns>
 
         [HttpGet("SearchJobLog")]
-        public async Task<ResponsePageResult<JobLogResult>> SearchJobLogAsync([FromQuery] SearchJobLogParam param)
+        public async Task<ResponseResult<PageModel<JobLogResult>>> SearchJobLogAsync([FromQuery] SearchJobLogParam param)
         {
-            #region 验证登录
-            var (loginFlag, result) = await userAuth.ChenkLoginAsync();
-            if (!loginFlag)
-            {
-                return new ResponsePageResult<JobLogResult>() { errno = 30, errmsg = "请先登录" };
-            }
             var id = userAuth.ID;
             var name = userAuth.Name;
-            #endregion
+
             return await jobLogService.SearchJobLogAsync(param);
         }
     }

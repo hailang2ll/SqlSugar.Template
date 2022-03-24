@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DMS.Autofac" Version="1.2.1" />
-    <PackageReference Include="DMS.Swagger" Version="1.4.8" />
+    <PackageReference Include="DMS.Autofac" Version="3.1.0" />
+    <PackageReference Include="DMS.Swagger" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>

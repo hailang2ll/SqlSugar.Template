@@ -1,4 +1,4 @@
-﻿using DMSN.Common.BaseParam;
+﻿using DMS.Common.Model.Param;
 using System;
 
 namespace SqlSugar.Template.Contracts.Param

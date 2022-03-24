@@ -9,7 +9,7 @@
             日志
             </summary>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService,DMS.Auth.IUserAuth,DMS.Redis.IRedisRepository)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService,DMS.Auth.Oauth2.IUserAuth,DMS.Redis.IRedisRepository)">
             <summary>
             
             </summary>
@@ -66,32 +66,36 @@
             <param name="param"></param>
             <returns></returns>
         </member>
-        <member name="T:SqlSugar.Template.Controllers.WeatherForecastController">
+        <member name="T:SqlSugar.Template.Controllers.MemberController">
             <summary>
             
             </summary>
         </member>
-        <member name="F:SqlSugar.Template.Controllers.WeatherForecastController._logger">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.#ctor(SqlSugar.Template.Contracts.IYxyMemberService)">
             <summary>
             
             </summary>
+            <param name="memberService"></param>
         </member>
-        <member name="P:SqlSugar.Template.Controllers.WeatherForecastController._sysJobLogService">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.GetMemberAsync(System.Int64)">
             <summary>
-            
+            获取用户
             </summary>
+            <param name="jobLogID"></param>
+            <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{SqlSugar.Template.Controllers.WeatherForecastController},SqlSugar.Template.Contracts.ISysJobLogService)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.GetMemberListAsync(System.Int64)">
             <summary>
-            
+            获取用户集合
             </summary>
-            <param name="logger"></param>
-            <param name="sysJobLogService"></param>
+            <param name="jobLogType"></param>
+            <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.WeatherForecastController.GetAsync">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.SearchMemberAsync(SqlSugar.Template.Contracts.Param.SearchYxyMemberParam)">
             <summary>
-            
+            搜索用户
             </summary>
+            <param name="param"></param>
             <returns></returns>
         </member>
         <member name="T:SqlSugar.Template.Program">
@@ -143,34 +147,9 @@
         </member>
         <member name="M:SqlSugar.Template.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
             <summary>
-            
+            接口注入
             </summary>
             <param name="builder"></param>
-        </member>
-        <member name="T:SqlSugar.Template.WeatherForecast">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:SqlSugar.Template.WeatherForecast.Date">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:SqlSugar.Template.WeatherForecast.TemperatureC">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:SqlSugar.Template.WeatherForecast.TemperatureF">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:SqlSugar.Template.WeatherForecast.Summary">
-            <summary>
-            
-            </summary>
         </member>
     </members>
 </doc>
