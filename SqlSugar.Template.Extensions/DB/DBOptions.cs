@@ -6,6 +6,12 @@ namespace SqlSugar.Template.Extensions.DB
 {
     public class DBOptions
     {
+        public string MainDB { get; set; }
+        public bool MutiDBEnabled { get; set; }
+        public List<MutiDBConns> MutiDBConns { get; set; }
+    }
+    public class MutiDBConns
+    {
         /// <summary>
         /// 连接启用开关
         /// </summary>

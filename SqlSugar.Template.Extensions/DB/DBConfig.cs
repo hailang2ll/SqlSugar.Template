@@ -11,10 +11,30 @@ namespace SqlSugar.Template.Extensions.DB
         /// 多库连接
         /// </summary>
         /// <returns></returns>
-        public static List<DBOptions> MutiInitConn()
+        public static List<MutiDBConns> MutiInitConn()
         {
-            List<DBOptions> listdatabase = DMS.Common.AppConfig.GetValueList<DBOptions>("DBS")
-                   .Where(i => i.Enabled).ToList();
+            DBOptions dBOptions = DMS.Common.AppConfig.GetValue<DBOptions>("DBS");
+            //if (!dBOptions.MutiDBEnabled)
+            //{
+            //    //单库模式
+            //    if (dBOptions.MutiDBConns.Count == 1)
+            //    {
+            //        return dBOptions.MutiDBConns;
+            //    }
+            //    else
+            //    {
+            //        var dbFirst = dBOptions.MutiDBConns.FirstOrDefault(d => d.ConnId == dBOptions.MainDB);
+            //        if (dbFirst == null)
+            //        {
+            //            dbFirst= dBOptions.MutiDBConns.FirstOrDefault();
+            //        }
+            //        else
+            //        { 
+                    
+            //        }
+            //    }
+            //}
+            List<MutiDBConns> listdatabase = dBOptions.MutiDBConns.Where(i => i.Enabled).ToList();
             return listdatabase;
         }
     }

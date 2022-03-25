@@ -19,6 +19,7 @@ namespace SqlSugar.Template.Extensions
         {
             var listConfig = new List<ConnectionConfig>();
             var allCon = DBConfig.MutiInitConn();
+
             //循环数据库连接
             allCon.ForEach(q =>
             {
