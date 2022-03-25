@@ -13,11 +13,14 @@ namespace SqlSugar.Template.Service
 {
     public class YxyMemberService : IYxyMemberService
     {
-        public ISqlSugarClient db;
+        public ISqlSugarClient _mainDB;
         public YxyMemberService(ISqlSugarClient sqlSugar)
         {
-            db = sqlSugar.AsTenant().GetConnection("yxy_system"); 
+            //默认为主对象
+            _mainDB = sqlSugar;
         }
+        //子对象
+        public SqlSugarProvider _slaveDB => _mainDB.AsTenant().GetConnection("yxy_system");
 
         /// <summary>
         /// 详情
@@ -26,9 +29,9 @@ namespace SqlSugar.Template.Service
         /// <returns></returns>
         public async Task<ResponseResult<YxyMemberResult>> GetMemberAsync(long jobLogID)
         {
-
+            _mainDB.AsTenant().GetConnection("yxy_system");
             ResponseResult<YxyMemberResult> result = new() { data = new YxyMemberResult() };
-            var entity = await db.Queryable<YxyMember>()
+            var entity = await _slaveDB.Queryable<YxyMember>()
                 .Select<YxyMemberResult>()
                 .FirstAsync(q => q.Id > 0);
             if (entity == null)
@@ -57,7 +60,7 @@ namespace SqlSugar.Template.Service
                 result.errmsg = "参数不合法";
                 return result;
             }
-            var list = await db.Queryable<YxyMember>()
+            var list = await _slaveDB.Queryable<YxyMember>()
                 .Where(q => q.Id > 0)
                 .Select<YxyMemberResult>()
                 .ToListAsync();
@@ -92,7 +95,7 @@ namespace SqlSugar.Template.Service
             var expression = Expressionable.Create<YxyMember>();
             expression.And(m => m.Id == 1);
             Expression<Func<YxyMember, bool>> where = expression.ToExpression();
-            var list = await db.Queryable<YxyMember>()
+            var list = await _slaveDB.Queryable<YxyMember>()
                 .WhereIF(where != null, where)
                 .OrderBy(q => q.Id, OrderByType.Desc)
                 .Select<YxyMemberResult>()

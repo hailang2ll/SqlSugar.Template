@@ -11,7 +11,6 @@ namespace SqlSugar.Template.Models
     /// 用户表
     ///</summary>
     [SugarTable("yxy_member")]
-    [TenantAttribute("yxy_system")]
     public class YxyMember
     {
         /// <summary>
