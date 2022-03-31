@@ -14,6 +14,52 @@ namespace SqlSugar.Template.Service
 {
     public class YxyMemberService : BaseRepository<YxyMember>, IYxyMemberService
     {
+        /// <summary>
+        /// 同一仓库事物
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ResponseResult> Add()
+        {
+            ResponseResult result = new ResponseResult() { errmsg = "新增数据" };
+            try
+            {
+                base.AsTenant().BeginTran();
+
+                await base.InsertAsync(new YxyMember() { MemberName = "test1" });
+                await base.UpdateAsync(q => new YxyMember() { MemberName = "updatetest1" }, q => q.Id == 1);
+
+                base.AsTenant().CommitTran();
+            }
+            catch (Exception ex)
+            {
+                base.AsTenant().RollbackTran();
+                throw;
+            }
+
+            return result;
+
+        }
+
+        /// <summary>
+        /// 多仓库事物
+        /// </summary>
+        public void TestTran()
+        {
+            try
+            {
+                itenant.BeginTran();
+
+                base.Insert(new YxyMember() { });
+                var orderDal = base.ChangeRepository<BaseRepository<Sys_JobLog>>();//切换仓储
+                orderDal.Insert(new Sys_JobLog() { });
+
+                itenant.CommitTran();
+            }
+            catch (Exception ex)
+            {
+                itenant.RollbackTran();
+            }
+        }
         public async Task<ResponseResult> GetEntity(long id)
         {
             ResponseResult result = new ResponseResult() { errmsg = "获取用户信息" };
@@ -146,25 +192,6 @@ namespace SqlSugar.Template.Service
             return result;
         }
 
-        /// <summary>
-        /// 使用事务,切换仓库事物
-        /// </summary>
-        public void TestTran()
-        {
-            try
-            {
-                itenant.BeginTran();
 
-                base.Insert(new YxyMember() { });
-                var orderDal = base.ChangeRepository<BaseRepository<Sys_JobLog>>();//切换仓储
-                orderDal.Insert(new Sys_JobLog() { });
-
-                itenant.CommitTran();
-            }
-            catch (Exception ex)
-            {
-                itenant.RollbackTran();
-            }
-        }
     }
 }
