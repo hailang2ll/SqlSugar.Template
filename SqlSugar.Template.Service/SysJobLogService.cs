@@ -1,8 +1,8 @@
 ﻿using DMS.Common.Helper;
 using DMS.Common.Model.Result;
-using SqlSugar.Template.Contracts;
-using SqlSugar.Template.Contracts.Param;
-using SqlSugar.Template.Contracts.Result;
+using SqlSugar.Template.IService;
+using SqlSugar.Template.IService.Param;
+using SqlSugar.Template.IService.Result;
 using SqlSugar.Template.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace SqlSugar.Template.Service
 {
+    /// <summary>
+    /// .net ioc注入
+    /// </summary>
     public class SysJobLogService : ISysJobLogService
     {
         public ISqlSugarClient db;

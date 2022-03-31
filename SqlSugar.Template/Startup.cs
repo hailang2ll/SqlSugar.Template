@@ -86,7 +86,7 @@ namespace SqlSugar.Template
                      "DMS.Template.IService.xml"
                 };
             });
-            services.AddSqlsugarSetup(Configuration);
+            services.AddSqlsugarIocSetup(Configuration);
             //开启redis服务
             services.AddRedisSetup();
             //开启HttpContext服务

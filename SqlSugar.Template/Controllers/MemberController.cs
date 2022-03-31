@@ -1,9 +1,9 @@
 ﻿using DMS.Common.Model.Result;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SqlSugar.Template.Contracts;
-using SqlSugar.Template.Contracts.Param;
-using SqlSugar.Template.Contracts.Result;
+using SqlSugar.Template.IService;
+using SqlSugar.Template.IService.Param;
+using SqlSugar.Template.IService.Result;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -32,10 +32,10 @@ namespace SqlSugar.Template.Controllers
         /// <param name="jobLogID"></param>
         /// <returns></returns>
         [HttpGet("GetJobLog")]
-        public async Task<ResponseResult<YxyMemberResult>> GetMemberAsync(long jobLogID)
+        public async Task<ResponseResult> GetMemberAsync(long jobLogID)
         {
-
-            return await _memberService.GetMemberAsync(jobLogID);
+            var a = await _memberService.GetEntity(jobLogID);
+            return a;
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace SqlSugar.Template.Controllers
         /// <param name="jobLogType"></param>
         /// <returns></returns>
         [HttpGet("GetJobLogList")]
-        public async Task<ResponseResult<List<YxyMemberResult>>> GetMemberListAsync(long jobLogType)
+        public async Task<ResponseResult> GetMemberListAsync(long jobLogType)
         {
-            return await _memberService.GetMemberListAsync(jobLogType);
+            return await _memberService.GetList(jobLogType);
         }
         /// <summary>
         /// 搜索用户

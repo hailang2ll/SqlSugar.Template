@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31605.320
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template", "SqlSugar.Template\SqlSugar.Template.csproj", "{322FE567-99BC-49E2-876A-D24E3ABC25C0}"
 EndProject
@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Service", "SqlSugar.Template.Service\SqlSugar.Template.Service.csproj", "{49A91422-D67A-4561-98B9-DF75BC03936B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Contracts", "SqlSugar.Template.Contracts\SqlSugar.Template.Contracts.csproj", "{44450AB6-E46C-4D2A-98CC-AE144459B492}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlSugar.Template.Extensions", "SqlSugar.Template.Extensions\SqlSugar.Template.Extensions.csproj", "{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSugar.Template.IService", "SqlSugar.Template.IService\SqlSugar.Template.IService.csproj", "{FBCEE401-2876-41C4-B0EA-150D1FACBAFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,14 +43,14 @@ Global
 		{49A91422-D67A-4561-98B9-DF75BC03936B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49A91422-D67A-4561-98B9-DF75BC03936B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49A91422-D67A-4561-98B9-DF75BC03936B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44450AB6-E46C-4D2A-98CC-AE144459B492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44450AB6-E46C-4D2A-98CC-AE144459B492}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44450AB6-E46C-4D2A-98CC-AE144459B492}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44450AB6-E46C-4D2A-98CC-AE144459B492}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBCEE401-2876-41C4-B0EA-150D1FACBAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBCEE401-2876-41C4-B0EA-150D1FACBAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBCEE401-2876-41C4-B0EA-150D1FACBAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBCEE401-2876-41C4-B0EA-150D1FACBAFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,8 +59,8 @@ Global
 		{FD95287A-A89C-46E8-893F-330A02B19C25} = {14AF1EB6-446C-4005-8502-DACCEE0D3043}
 		{4377151C-E0FA-49B2-BA98-97AD64622F17} = {15FE79D7-5773-4C8A-A2F7-FB19B9E300DC}
 		{49A91422-D67A-4561-98B9-DF75BC03936B} = {15FE79D7-5773-4C8A-A2F7-FB19B9E300DC}
-		{44450AB6-E46C-4D2A-98CC-AE144459B492} = {15FE79D7-5773-4C8A-A2F7-FB19B9E300DC}
 		{CB04A1F6-79BE-4BAA-AFF4-F07819B9C464} = {A6044E8C-C448-4D91-9DB3-F8362824D98A}
+		{FBCEE401-2876-41C4-B0EA-150D1FACBAFB} = {15FE79D7-5773-4C8A-A2F7-FB19B9E300DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {264264D8-8D3A-45EF-94C2-206A84C80053}

@@ -9,7 +9,7 @@
             日志
             </summary>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.Contracts.ISysJobLogService,DMS.Auth.Oauth2.IUserAuth,DMS.Redis.IRedisRepository)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.#ctor(SqlSugar.Template.IService.ISysJobLogService,DMS.Auth.Oauth2.IUserAuth,DMS.Redis.IRedisRepository)">
             <summary>
             
             </summary>
@@ -17,14 +17,14 @@
             <param name="userAuth"></param>
             <param name="redisRepository"></param>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.AddAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.AddAsync(SqlSugar.Template.IService.Param.AddJobLogParam)">
             <summary>
             新增工作日志
             </summary>
             <param name="param"></param>
             <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.AddTranAsync(SqlSugar.Template.Contracts.Param.AddJobLogParam)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.AddTranAsync(SqlSugar.Template.IService.Param.AddJobLogParam)">
             <summary>
             事物处理
             </summary>
@@ -59,7 +59,7 @@
             <param name="jobLogType"></param>
             <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.JobLogController.SearchJobLogAsync(SqlSugar.Template.Contracts.Param.SearchJobLogParam)">
+        <member name="M:SqlSugar.Template.Controllers.JobLogController.SearchJobLogAsync(SqlSugar.Template.IService.Param.SearchJobLogParam)">
             <summary>
             搜索日志
             </summary>
@@ -71,7 +71,7 @@
             
             </summary>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.MemberController.#ctor(SqlSugar.Template.Contracts.IYxyMemberService)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.#ctor(SqlSugar.Template.IService.IYxyMemberService)">
             <summary>
             
             </summary>
@@ -91,7 +91,7 @@
             <param name="jobLogType"></param>
             <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.MemberController.SearchMemberAsync(SqlSugar.Template.Contracts.Param.SearchYxyMemberParam)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.SearchMemberAsync(SqlSugar.Template.IService.Param.SearchYxyMemberParam)">
             <summary>
             搜索用户
             </summary>

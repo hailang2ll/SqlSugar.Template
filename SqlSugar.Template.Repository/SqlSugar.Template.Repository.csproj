@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="BaseRepository.cs" />
-    <Compile Remove="IBaseRepository.cs" />
     <Compile Remove="IRoleModulePermissionRepository.cs" />
     <Compile Remove="RoleModulePermissionRepository.cs" />
   </ItemGroup>
@@ -20,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SqlSugar.Template.Extensions\SqlSugar.Template.Extensions.csproj" />
     <ProjectReference Include="..\SqlSugar.Template.Models\SqlSugar.Template.Models.csproj" />
   </ItemGroup>
 
