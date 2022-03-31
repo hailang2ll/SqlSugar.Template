@@ -43,7 +43,7 @@ namespace SqlSugar.Template.Service
         /// <summary>
         /// 多仓库事物
         /// </summary>
-        public void TestTran()
+        public void RepositoryTran()
         {
             try
             {
