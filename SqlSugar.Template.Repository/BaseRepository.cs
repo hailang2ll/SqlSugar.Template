@@ -11,6 +11,7 @@ namespace SqlSugar.Template.Repository
 {
     /// <summary>
     /// 基础仓库
+    /// 适用ioc注入：services.AddSqlsugarIocSetup(Configuration);
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class BaseRepository<TEntity> : SimpleClient<TEntity>, IBaseRepository<TEntity> where TEntity : class, new()
@@ -29,16 +30,6 @@ namespace SqlSugar.Template.Repository
         }
 
         #region 实体查询,select()用法
-        /// <summary>
-        /// 实体查询
-        /// </summary>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="objId"></param>
-        /// <returns></returns>
-        public async Task<TResult> GetEntity<TResult>(object objId)
-        {
-            return await Context.Queryable<TEntity>().Select<TResult>().InSingleAsync(objId);
-        }
         public async Task<TResult> GetEntity<TResult>(Expression<Func<TEntity, bool>> predicate)
         {
             return await Context.Queryable<TEntity>().Where(predicate).Select<TResult>().FirstAsync();

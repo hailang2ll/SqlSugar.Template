@@ -71,14 +71,12 @@ namespace SqlSugar.Template.Service
             }
             //实体
             var entity = await base.GetByIdAsync(id);
-            entity = base.GetSingle(it => it.Id == id);//查询单条记录，结果集不能超过1，不然会提示错误
-            entity = base.GetFirst(it => it.Id == id);//查询第一条记录
+            entity = await base.GetSingleAsync(it => it.Id == id);//查询单条记录，结果集不能超过1，不然会提示错误
+            entity = await base.GetFirstAsync(it => it.Id == id);//查询第一条记录
 
-            //主键查询，一种
-            var centity = await base.GetEntity<YxyMemberResult>(id);
-            //指定返回实体，二种
-            centity = await base.GetEntity<YxyMemberResult>(q => q.Id == id);
-            //三种
+            //指定返回实体，一种
+            var centity = await base.GetEntity<YxyMemberResult>(q => q.Id == id);
+            //二种
             centity = await base.GetEntity(q => new YxyMemberResult() { Id = q.Id, MemberName = q.MemberName }, q => q.Id == id);
             var bentity = await base.GetEntity(q => new { q.Id, q.MemberName, q.Mobile }, q => q.Id == id);
             //通用
