@@ -12,17 +12,10 @@ namespace SqlSugar.Template.IService
     /// </summary>
     public interface IYxyMemberService
     {
-
+        Task<ResponseResult> Add(AddMemberParam param);
+        Task<ResponseResult> AddTran(AddMemberParam param);
         Task<ResponseResult> GetEntity(long id);
-        /// <summary>
-        /// 异步查询
-        /// </summary>
-        /// <returns></returns>
         Task<ResponseResult> GetList(long id);
-        /// <summary>
-        /// 异步查询
-        /// </summary>
-        /// <returns></returns>
-        Task<ResponseResult<PageModel<YxyMemberResult>>> SearchMemberAsync(SearchYxyMemberParam param);
+        Task<ResponseResult> GetList(SearchYxyMemberParam param);
     }
 }

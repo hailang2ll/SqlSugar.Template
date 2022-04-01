@@ -25,26 +25,46 @@ namespace SqlSugar.Template.Controllers
         {
             this._memberService = memberService;
         }
-
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost("Add")]
+        public async Task<ResponseResult> Add(AddMemberParam param)
+        {
+            var a = await _memberService.Add(param);
+            return a;
+        }
+        /// <summary>
+        /// 添加用户-切换仓库事物
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost("AddTran")]
+        public async Task<ResponseResult> AddTran(AddMemberParam param)
+        {
+            var a = await _memberService.AddTran(param);
+            return a;
+        }
         /// <summary>
         /// 获取用户
         /// </summary>
         /// <param name="jobLogID"></param>
         /// <returns></returns>
-        [HttpGet("GetJobLog")]
-        public async Task<ResponseResult> GetMemberAsync(long jobLogID)
+        [HttpGet("GetEntity")]
+        public async Task<ResponseResult> GetEntity(long jobLogID)
         {
             var a = await _memberService.GetEntity(jobLogID);
             return a;
         }
-
         /// <summary>
         /// 获取用户集合
         /// </summary>
         /// <param name="jobLogType"></param>
         /// <returns></returns>
-        [HttpGet("GetJobLogList")]
-        public async Task<ResponseResult> GetMemberListAsync(long jobLogType)
+        [HttpGet("GetList")]
+        public async Task<ResponseResult> GetList(long jobLogType)
         {
             return await _memberService.GetList(jobLogType);
         }
@@ -53,13 +73,10 @@ namespace SqlSugar.Template.Controllers
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-
-        [HttpGet("SearchJobLog")]
-        public async Task<ResponseResult<PageModel<YxyMemberResult>>> SearchMemberAsync([FromQuery] SearchYxyMemberParam param)
+        [HttpGet("GetPageList")]
+        public async Task<ResponseResult> GetPageList([FromQuery] SearchYxyMemberParam param)
         {
-
-
-            return await _memberService.SearchMemberAsync(param);
+            return await _memberService.GetList(param);
         }
     }
 }

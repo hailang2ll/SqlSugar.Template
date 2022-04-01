@@ -11,7 +11,7 @@ namespace SqlSugar.Template.Repository
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
-        #region 实体查询,select()用法
+        #region 查询实体,select()用法
         Task<TResult> GetEntity<TResult>(Expression<Func<TEntity, bool>> predicate);
         Task<TResult> GetEntity<TResult>(Expression<Func<TEntity, TResult>> expression, Expression<Func<TEntity, bool>> predicate);
         #endregion

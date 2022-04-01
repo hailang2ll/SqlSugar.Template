@@ -11,7 +11,6 @@ namespace SqlSugar.Template.Repository
 {
     /// <summary>
     /// 基础仓库
-    /// 适用ioc注入：services.AddSqlsugarIocSetup(Configuration);
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class BaseRepository<TEntity> : SimpleClient<TEntity>, IBaseRepository<TEntity> where TEntity : class, new()
@@ -29,7 +28,7 @@ namespace SqlSugar.Template.Repository
             itenant = DbScoped.SugarScope;//设置租户接口
         }
 
-        #region 实体查询,select()用法
+        #region 查询实体,select()用法
         public async Task<TResult> GetEntity<TResult>(Expression<Func<TEntity, bool>> predicate)
         {
             return await Context.Queryable<TEntity>().Where(predicate).Select<TResult>().FirstAsync();
@@ -39,8 +38,6 @@ namespace SqlSugar.Template.Repository
             return await Context.Queryable<TEntity>().Where(predicate).Select(expression).FirstAsync();
         }
         #endregion
-
-
 
 
 

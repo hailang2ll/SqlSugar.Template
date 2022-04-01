@@ -77,21 +77,35 @@
             </summary>
             <param name="memberService"></param>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.MemberController.GetMemberAsync(System.Int64)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.Add(SqlSugar.Template.IService.Param.AddMemberParam)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.MemberController.AddTran(SqlSugar.Template.IService.Param.AddMemberParam)">
+            <summary>
+            添加用户-切换仓库事物
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlSugar.Template.Controllers.MemberController.GetEntity(System.Int64)">
             <summary>
             获取用户
             </summary>
             <param name="jobLogID"></param>
             <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.MemberController.GetMemberListAsync(System.Int64)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.GetList(System.Int64)">
             <summary>
             获取用户集合
             </summary>
             <param name="jobLogType"></param>
             <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.MemberController.SearchMemberAsync(SqlSugar.Template.IService.Param.SearchYxyMemberParam)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.GetPageList(SqlSugar.Template.IService.Param.SearchYxyMemberParam)">
             <summary>
             搜索用户
             </summary>

@@ -1,10 +1,7 @@
-﻿using SqlSugar;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using SqlSugar;
 namespace SqlSugar.Template.Models
 {
     /// <summary>
@@ -12,6 +9,7 @@ namespace SqlSugar.Template.Models
     ///</summary>
     [SugarTable("yxy_member")]
     [TenantAttribute("yxy_system")]
+
     public class YxyMember
     {
         /// <summary>

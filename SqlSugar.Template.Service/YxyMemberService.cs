@@ -15,43 +15,86 @@ namespace SqlSugar.Template.Service
     public class YxyMemberService : BaseRepository<YxyMember>, IYxyMemberService
     {
         /// <summary>
-        /// 同一仓库事物
+        /// 同库事物
         /// </summary>
         /// <returns></returns>
-        public async Task<ResponseResult> Add()
+        public async Task<ResponseResult> Add(AddMemberParam param)
         {
             ResponseResult result = new ResponseResult() { errmsg = "新增数据" };
             try
             {
-                base.AsTenant().BeginTran();
+                itenant.BeginTran();
 
-                await base.InsertAsync(new YxyMember() { MemberName = "test1" });
-                await base.UpdateAsync(q => new YxyMember() { MemberName = "updatetest1" }, q => q.Id == 1);
+                YxyMember member = new YxyMember()
+                {
+                    MemberName = param.MemberName,
+                    Password = "",
+                    PasswordType = 1,
+                    TrueName = param.TrueName,
+                    Mobile = param.Mobile,
+                    MobileFlag = 1,
+                    Email = "",
+                    EmailFlag = 1,
+                    SexType = 1,
+                    Qq = "",
+                    StatusFlag = 1,
+                    DisableReason = "",
+                    CardImagePath = "",
+                    CreateTime = DateTime.Now,
+                    ChannelType = 1,
+                };
+                await base.InsertAsync(member);
+                await base.UpdateAsync(q => new YxyMember() { TrueName = "xingsk0" }, q => q.Id == 50003);
 
-                base.AsTenant().CommitTran();
+                itenant.CommitTran();
             }
             catch (Exception ex)
             {
-                base.AsTenant().RollbackTran();
+                itenant.RollbackTran();
                 throw;
             }
-
             return result;
 
         }
-
         /// <summary>
-        /// 多仓库事物
+        /// 切换仓库事物
         /// </summary>
-        public void RepositoryTran()
+        public async Task<ResponseResult> AddTran(AddMemberParam param)
         {
+            ResponseResult result = new();
             try
             {
                 itenant.BeginTran();
-
-                base.Insert(new YxyMember() { });
-                var orderDal = base.ChangeRepository<BaseRepository<Sys_JobLog>>();//切换仓储
-                orderDal.Insert(new Sys_JobLog() { });
+                YxyMember member = new YxyMember()
+                {
+                    MemberName = param.MemberName,
+                    Password = "",
+                    PasswordType = 1,
+                    TrueName = param.TrueName,
+                    Mobile = param.Mobile,
+                    MobileFlag = 1,
+                    Email = "",
+                    EmailFlag = 1,
+                    SexType = 1,
+                    Qq = "",
+                    StatusFlag = 1,
+                    DisableReason = "",
+                    CardImagePath = "",
+                    CreateTime = DateTime.Now,
+                    ChannelType = 1,
+                };
+                await base.InsertAsync(member);
+                var joblogDal = base.ChangeRepository<BaseRepository<SysJoblog>>();//切换仓储
+                SysJoblog joblog = new()
+                {
+                    Name = param.MemberName,
+                    JobLogtype = 1,
+                    ServerIp = IPHelper.GetCurrentIp(),
+                    TaskLogtype = 1,
+                    Message = "我是会员事物",
+                    CreateTime = DateTime.Now,
+                };
+                await joblogDal.InsertAsync(joblog);
 
                 itenant.CommitTran();
             }
@@ -59,7 +102,13 @@ namespace SqlSugar.Template.Service
             {
                 itenant.RollbackTran();
             }
+            return result;
         }
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ResponseResult> GetEntity(long id)
         {
             ResponseResult result = new ResponseResult() { errmsg = "获取用户信息" };
@@ -144,12 +193,9 @@ namespace SqlSugar.Template.Service
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<ResponseResult<PageModel<YxyMemberResult>>> SearchMemberAsync(SearchYxyMemberParam param)
+        public async Task<ResponseResult> GetList(SearchYxyMemberParam param)
         {
-            ResponseResult<PageModel<YxyMemberResult>> result = new()
-            {
-                data = new PageModel<YxyMemberResult>()
-            };
+            ResponseResult result = new();
             if (param == null)
             {
                 result.errno = 1;
