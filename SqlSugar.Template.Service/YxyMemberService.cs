@@ -21,6 +21,8 @@ namespace SqlSugar.Template.Service
         public async Task<ResponseResult> Add(AddMemberParam param)
         {
             ResponseResult result = new ResponseResult() { errmsg = "新增数据" };
+
+
             try
             {
                 itenant.BeginTran();
