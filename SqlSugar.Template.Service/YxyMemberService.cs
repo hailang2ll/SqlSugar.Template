@@ -57,7 +57,7 @@ namespace SqlSugar.Template.Service
 
         }
         /// <summary>
-        /// 切换仓库事物
+        /// 切换仓库，不同库事物
         /// </summary>
         public async Task<ResponseResult> AddTran(AddMemberParam param)
         {
