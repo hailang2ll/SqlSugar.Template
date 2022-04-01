@@ -26,7 +26,7 @@ namespace SqlSugar.Template.Controllers
             this._memberService = memberService;
         }
         /// <summary>
-        /// 添加用户
+        /// 添加用户-同库事物
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
@@ -37,7 +37,7 @@ namespace SqlSugar.Template.Controllers
             return a;
         }
         /// <summary>
-        /// 添加用户-切换仓库事物
+        /// 添加用户-切换仓库不同库事物
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>

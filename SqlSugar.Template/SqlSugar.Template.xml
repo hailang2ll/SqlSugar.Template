@@ -79,14 +79,14 @@
         </member>
         <member name="M:SqlSugar.Template.Controllers.MemberController.Add(SqlSugar.Template.IService.Param.AddMemberParam)">
             <summary>
-            添加用户
+            添加用户-同库事物
             </summary>
             <param name="param"></param>
             <returns></returns>
         </member>
         <member name="M:SqlSugar.Template.Controllers.MemberController.AddTran(SqlSugar.Template.IService.Param.AddMemberParam)">
             <summary>
-            添加用户-切换仓库事物
+            添加用户-切换仓库不同库事物
             </summary>
             <param name="param"></param>
             <returns></returns>
