@@ -26,20 +26,9 @@ namespace SqlSugar.Template.IService.Param
         public string Mobile { get; set; }
     }
     /// <summary>
-    /// 添加工作日志
-    /// </summary>
-    public class YxyMemberParam
-    {
-        /// <summary>
-        /// 猪血消息
-        /// </summary>
-        public string MessMemberNameage { get; set; }
-    }
-
-    /// <summary>
     /// 
     /// </summary>
-    public class SearchYxyMemberParam : PageParam
+    public class SearchMemberParam : PageParam
     {
         /// <summary>
         /// 任务消息

@@ -74,7 +74,7 @@ namespace SqlSugar.Template.Controllers
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet("GetPageList")]
-        public async Task<ResponseResult> GetPageList([FromQuery] SearchYxyMemberParam param)
+        public async Task<ResponseResult> GetPageList([FromQuery] SearchMemberParam param)
         {
             return await _memberService.GetList(param);
         }

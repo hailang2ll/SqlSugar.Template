@@ -16,6 +16,6 @@ namespace SqlSugar.Template.IService
         Task<ResponseResult> AddTran(AddMemberParam param);
         Task<ResponseResult> GetEntity(long id);
         Task<ResponseResult> GetList(long id);
-        Task<ResponseResult> GetList(SearchYxyMemberParam param);
+        Task<ResponseResult> GetList(SearchMemberParam param);
     }
 }

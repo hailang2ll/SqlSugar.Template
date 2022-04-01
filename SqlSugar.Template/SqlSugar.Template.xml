@@ -105,7 +105,7 @@
             <param name="jobLogType"></param>
             <returns></returns>
         </member>
-        <member name="M:SqlSugar.Template.Controllers.MemberController.GetPageList(SqlSugar.Template.IService.Param.SearchYxyMemberParam)">
+        <member name="M:SqlSugar.Template.Controllers.MemberController.GetPageList(SqlSugar.Template.IService.Param.SearchMemberParam)">
             <summary>
             搜索用户
             </summary>

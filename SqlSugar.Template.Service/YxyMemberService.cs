@@ -193,7 +193,7 @@ namespace SqlSugar.Template.Service
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<ResponseResult> GetList(SearchYxyMemberParam param)
+        public async Task<ResponseResult> GetList(SearchMemberParam param)
         {
             ResponseResult result = new();
             if (param == null)
