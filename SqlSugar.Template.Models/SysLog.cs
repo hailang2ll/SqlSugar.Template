@@ -13,7 +13,7 @@ namespace SqlSugar.Template.Models
         /// <summary>
         /// 主键 
         ///</summary>
-        [SugarColumn(ColumnName = "id", IsPrimaryKey = true)]
+        [SugarColumn(ColumnName = "id", IsPrimaryKey = true, IsIdentity = true)]
         public long Id { get; set; }
         /// <summary>
         /// 会员名称 
