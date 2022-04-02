@@ -168,6 +168,29 @@ namespace SqlSugar.Template.Repository
 
         #endregion
 
+        /// <summary>
+        /// 多租户异常事物
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public async Task<ResponseResult> UseITenantTran(Action action)
+        {
+            ResponseResult result = new();
+            var resultTran = await itenant.UseTranAsync(() =>
+            {
+                action();
+                return Task.CompletedTask;
+            });
+            if (!resultTran.IsSuccess)
+            {
+                //捕捉异常
+                result.errno = 1;
+                result.errmsg = resultTran.ErrorMessage;
+                throw resultTran.ErrorException;
+            }
+            return result;
+
+        }
         public DbResult<bool> UseTran(Action action)
         {
             try

@@ -112,6 +112,12 @@ namespace SqlSugar.Template.Service
                 var t2 = await Context.Insertable(jobEntity).ExecuteCommandAsync();
             }, e => throw e);
             #endregion
+
+            await UseITenantTran(() =>
+            {
+                var t1 = Context.Insertable(jobLogEntity).ExecuteCommand();
+                var t2 = Context.Insertable(jobEntity).ExecuteCommand();
+            });
             return result;
         }
         /// <summary>
@@ -239,14 +245,14 @@ namespace SqlSugar.Template.Service
                 .Select<JobLogResult>()
                 .ToPageListAsync(param.pageIndex, param.pageSize, totalCount);
 
-            
+
             if (list == null || list.Count <= 0)
             {
                 result.errno = 2;
                 result.errmsg = "未找到相关数据";
                 return result;
             }
-            result.data= await base.QueryPageList<JobLogResult>(where, param, "id desc");
+            result.data = await base.QueryPageList<JobLogResult>(where, param, "id desc");
             return result;
         }
     }
