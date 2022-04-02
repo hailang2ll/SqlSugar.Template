@@ -168,6 +168,19 @@ namespace SqlSugar.Template.Repository
 
         #endregion
 
-
+        public DbResult<bool> UseTran(Action action)
+        {
+            try
+            {
+                var result = Context.Ado.UseTran(() => action());
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Context.Ado.RollbackTran();
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
     }
 }
