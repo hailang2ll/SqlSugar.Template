@@ -113,10 +113,10 @@ namespace SqlSugar.Template.Service
             }, e => throw e);
             #endregion
 
-            await UseITenantTran(() =>
+            await UseITenantTran(async () =>
             {
-                var t1 = Context.Insertable(jobLogEntity).ExecuteCommand();
-                var t2 = Context.Insertable(jobEntity).ExecuteCommand();
+                var t1 = await Context.Insertable(jobLogEntity).ExecuteCommandAsync();
+                var t2 = await Context.Insertable(jobEntity).ExecuteCommandAsync();
             });
             return result;
         }

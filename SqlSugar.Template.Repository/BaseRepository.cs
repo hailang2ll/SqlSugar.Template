@@ -173,13 +173,12 @@ namespace SqlSugar.Template.Repository
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        public async Task<ResponseResult> UseITenantTran(Action action)
+        public async Task<ResponseResult> UseITenantTran(Func<Task> action)
         {
             ResponseResult result = new();
-            var resultTran = await itenant.UseTranAsync(() =>
+            var resultTran = await itenant.UseTranAsync(async () =>
             {
-                action();
-                return Task.CompletedTask;
+                await action();
             });
             if (!resultTran.IsSuccess)
             {
