@@ -15,7 +15,7 @@ namespace SqlSugar.Template.Service
     /// <summary>
     /// .net ioc注入
     /// </summary>
-    public class SysJobLogService : BaseRepository<SysJoblog>, ISysJobLogService
+    public class SysJobLogService : BaseService<SysJoblog>, ISysJobLogService
     {
         /// <summary>
         /// 各种新增语法
@@ -238,16 +238,15 @@ namespace SqlSugar.Template.Service
                 .OrderBy(q => q.Id, OrderByType.Desc)
                 .Select<JobLogResult>()
                 .ToPageListAsync(param.pageIndex, param.pageSize, totalCount);
+
+            
             if (list == null || list.Count <= 0)
             {
                 result.errno = 2;
                 result.errmsg = "未找到相关数据";
                 return result;
             }
-            result.data.resultList = list;
-            result.data.pageIndex = param.pageIndex;
-            result.data.pageSize = param.pageSize;
-            result.data.totalRecord = (int)totalCount;
+            result.data= await base.QueryPageList<JobLogResult>(where, param, "id desc");
             return result;
         }
     }

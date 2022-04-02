@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SqlSugar.Template.Service
 {
-    public class YxyMemberService : BaseRepository<YxyMember>, IYxyMemberService
+    public class YxyMemberService : BaseService<YxyMember>, IYxyMemberService
     {
         /// <summary>
         /// 同库事物
@@ -98,10 +98,12 @@ namespace SqlSugar.Template.Service
                 };
                 await joblogDal.InsertAsync(joblog);
 
+
                 itenant.CommitTran();
             }
             catch (Exception ex)
             {
+                result.errmsg= ex.Message;
                 itenant.RollbackTran();
             }
             return result;

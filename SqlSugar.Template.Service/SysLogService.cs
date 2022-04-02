@@ -15,7 +15,7 @@ namespace SqlSugar.Template.Service
     /// <summary>
     /// .net ioc注入
     /// </summary>
-    public class SysLogService : BaseRepository<SysLog>, ISysLogService
+    public class SysLogService : BaseService<SysLog>, ISysLogService
     {
         /// <summary>
         /// 新增
@@ -101,6 +101,7 @@ namespace SqlSugar.Template.Service
             }
             catch (Exception ex)
             {
+                result.errmsg = ex.Message;
                 itenant.RollbackTran();
             }
             return result;
