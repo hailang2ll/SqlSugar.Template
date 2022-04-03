@@ -168,41 +168,34 @@ namespace SqlSugar.Template.Repository
 
         #endregion
 
+        #region 事物委托
         /// <summary>
         /// 多租户异常事物
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        public async Task<ResponseResult> UseITenantTran(Func<Task> action)
+        public async Task<DbResult<bool>> UseITenantTran(Func<Task> action)
         {
-            ResponseResult result = new();
             var resultTran = await itenant.UseTranAsync(async () =>
             {
                 await action();
             });
-            if (!resultTran.IsSuccess)
-            {
-                //捕捉异常
-                result.errno = 1;
-                result.errmsg = resultTran.ErrorMessage;
-                throw resultTran.ErrorException;
-            }
-            return result;
+            return resultTran;
 
         }
-        public DbResult<bool> UseTran(Action action)
+        /// <summary>
+        /// 同一对句事物处理
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public async Task<DbResult<bool>> UseTran(Func<Task> action)
         {
-            try
+            var resultTran = await Context.Ado.UseTranAsync(async () =>
             {
-                var result = Context.Ado.UseTran(() => action());
-                return result;
-            }
-            catch (Exception ex)
-            {
-                Context.Ado.RollbackTran();
-                Console.WriteLine(ex.Message);
-                throw;
-            }
+                await action();
+            });
+            return resultTran;
         }
+        #endregion
     }
 }

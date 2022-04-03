@@ -46,5 +46,10 @@ namespace SqlSugar.Template.Repository
         Task<PageModel<TResult>> QueryPageList<TResult>(Expression<Func<TEntity, bool>> whereExpression, PageParam pageParam, string strOrderByFileds = null);
         Task<PageModel<TResult>> QueryPageList<TResult>(Expression<Func<TEntity, TResult>> selectExpression, Expression<Func<TEntity, bool>> whereExpression, PageParam pageParam, string strOrderByFileds = null);
         #endregion
+
+        #region 事物委托
+        Task<DbResult<bool>> UseITenantTran(Func<Task> action);
+        Task<DbResult<bool>> UseTran(Func<Task> action);
+        #endregion
     }
 }
